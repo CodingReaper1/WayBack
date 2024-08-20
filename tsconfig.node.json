@@ -1,0 +1,41 @@
+// {
+//   "extends": "./tsconfig.json",
+//   "compilerOptions": {
+//     "composite": true,
+//     "declaration": true, // Optional: if you need declaration files
+//     "emitDeclarationOnly": false, // Optional: if you want to emit JavaScript as well
+//     "target": "ES2022",
+//     "lib": ["ES2023"],
+//     "module": "ESNext",
+//     "skipLibCheck": true,
+
+//     /* Bundler mode */
+//     "moduleResolution": "bundler",
+//     "allowImportingTsExtensions": true,
+//     "isolatedModules": true,
+//     "moduleDetection": "force",
+//     "noEmit": true,
+
+//     /* Linting */
+//     "strict": true,
+//     "noUnusedLocals": true,
+//     "noUnusedParameters": true,
+//     "noFallthroughCasesInSwitch": true
+//   },
+//   "include": ["vite.config.ts"]
+// }
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020", // Adjust based on your Node.js version
+    "module": "CommonJS", // Node.js uses CommonJS modules
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src", // Root directory of your source files
+    "declaration": true, // Generate .d.ts files
+    "composite": true, // Required for project references
+    "esModuleInterop": true, // Allows default imports from CommonJS modules
+    "skipLibCheck": true // Skip type checking of declaration files
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"], // Include TypeScript files
+  "exclude": ["node_modules", "**/*.test.ts"] // Exclude specific files
+}
