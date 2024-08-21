@@ -22,6 +22,11 @@ export async function logInApi({ email, password }: LogInTypes) {
   return data;
 }
 
+export async function logoutApi() {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw new Error(`Error: ${error.message}`);
+}
+
 export async function getCurrentUserApi() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;

@@ -7,8 +7,11 @@
 } */
 
 html {
-  font-family: "Rubik", sans-serif;
   font-size: 62.5%;
+}
+
+body {
+  font-family: "Montserrat", "Rubik", sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -21,10 +24,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #18181b;
+  background: #0f172a;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #09090b;
+  background: #020617;
 }

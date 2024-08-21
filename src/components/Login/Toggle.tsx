@@ -9,7 +9,7 @@ function Toggle() {
 
   return (
     <motion.div
-      className={` absolute left-1/2 top-0 z-[1000] hidden h-full w-1/2 overflow-hidden sm:block `}
+      className={` absolute left-1/2 top-0 z-[1000] hidden h-full w-1/2 overflow-hidden sm:block  `}
       animate={{
         x: signUpActive ? "-100%" : 0,
         borderRadius: signUpActive
@@ -19,7 +19,7 @@ function Toggle() {
       transition={{ duration: 0.6, ease: "linear", times: [0, 0.5, 1] }}
     >
       <motion.div
-        className=" relative -left-full h-full w-[200%]  bg-gradient-to-r from-red-600 to-red-700 text-white  "
+        className=" relative -left-full h-full w-[200%]  bg-gradient-to-r from-red-600 to-red-700 text-white dark:from-slate-900 dark:to-slate-950 dark:text-slate-200 "
         animate={{ x: signUpActive ? "50%" : 0 }}
         transition={{ ease: "linear", duration: 0.6 }}
       >

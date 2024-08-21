@@ -12,14 +12,14 @@ function useGeoloacationData(
   useEffect(() => {
     const geoWatch = navigator.geolocation.watchPosition(
       (position) => {
-        // if (
-        //   position.coords.latitude !== myPosition[0] ||
-        //   position.coords.longitude !== myPosition[1]
-        // )
-        //   changeMyPosition([
-        //     position.coords.latitude,
-        //     position.coords.longitude,
-        //   ]);
+        if (
+          position.coords.latitude !== myPosition[0] ||
+          position.coords.longitude !== myPosition[1]
+        )
+          changeMyPosition([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
         // console.log(position);
         if (position.coords.heading && position.coords.heading !== heading)
           setHeading(position.coords.heading);

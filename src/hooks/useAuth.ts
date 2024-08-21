@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -7,7 +7,6 @@ import useLoginContext from "../context/useLoginContext";
 
 function useAuth() {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { signIn, enableButton } = useLoginContext();
 
   const { mutate: createAccount, isPending: isUploading } = useMutation({
@@ -15,7 +14,6 @@ function useAuth() {
     onSuccess: (data) => {
       navigate(`/map/${data.user.id}`);
       toast.success("Your account has been created!");
-      queryClient.invalidateQueries({ queryKey: ["authentication"] });
       signIn();
       enableButton();
     },

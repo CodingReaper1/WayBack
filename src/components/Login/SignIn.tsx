@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
 
-
 import useLoginContext from "../../context/useLoginContext";
 import LoginInput from "./LoginInput";
 import LoginFormRow from "./LoginFormRow";
@@ -37,7 +36,7 @@ function SignIn() {
 
   return (
     <motion.div
-      className=" absolute top-[20rem] z-[20] h-full w-full bg-white xxs:px-1 xs:px-12 sm:left-0 sm:top-0 sm:w-1/2 sm:px-0 "
+      className=" absolute top-[20rem] z-[20] h-96 w-full xxs:px-1  xs:px-12 sm:left-0 sm:top-0 sm:h-full sm:w-1/2 sm:px-0 "
       initial={{ x: 0 }}
       animate={{
         x: window.innerWidth > 640 ? (signUpActive ? "100%" : 0) : 0,

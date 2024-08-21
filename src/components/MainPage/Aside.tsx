@@ -12,6 +12,7 @@ import Spinner from "../Spinner.js";
 import useCreateSelectedPlace from "../../hooks/useCreateSelectedPlace.js";
 import useReadSelectedPlaces from "../../hooks/useReadSelectedPlaces.js";
 import StartSelecting from "./StartSelecting.js";
+import useLogout from "../../hooks/useLogout.js";
 
 type PlaceTypes = {
   destination: string;
@@ -23,6 +24,7 @@ type PlaceTypes = {
 function Aside() {
   const { sideBarFormOpen, sideBarOpened, closeSideBar, closeSideBarForm } =
     useMainPageContext();
+  const { logout, isPending } = useLogout();
 
   const {
     register,
@@ -47,13 +49,23 @@ function Aside() {
 
   return (
     <motion.aside
-      className={`relative z-[999999999999999999999999999999999999]  flex  h-screen w-screen flex-col gap-24 overflow-y-auto bg-zinc-800 px-[2.4rem] py-10 text-2xl   text-white sm:h-auto sm:w-auto `}
-      initial={{ x: 0 }}
-      animate={{ x: !sideBarOpened ? "-100%" : 0 }}
+      className={`relative  flex flex-col gap-24 overflow-y-auto bg-slate-800  text-2xl   text-white`}
+      initial={{ width: "36rem", padding: "2.5rem 2.4rem 2.5rem 2.4rem" }}
+      animate={{
+        width:
+          window.innerWidth > 640
+            ? sideBarOpened
+              ? "36rem"
+              : "0"
+            : sideBarOpened
+              ? "100vw"
+              : "0",
+        padding: sideBarOpened ? "2.5rem 2.4rem 2.5rem 2.4rem" : "0",
+      }}
       transition={{ duration: 0.3 }}
     >
       <div className="flex justify-between">
-        <Button type="mainpage/link" to="/">
+        <Button type="mainpage/link" onClick={logout}>
           Log out
         </Button>
         <Button

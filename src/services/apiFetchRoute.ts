@@ -43,7 +43,7 @@ async function updateRouteApi({
   // if (!resp.ok) throw new Error("Problem with fetching route");
 
   const data = await resp.json();
-  console.log(data);
+  // console.log(data);
 
   // if (data?.message) throw new Error(`Error: ${data?.message}`);
 

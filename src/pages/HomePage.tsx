@@ -7,7 +7,7 @@ import Background from "../components/HomePage/Background";
 
 function HomePage() {
   return (
-    <div className="relative z-0 h-screen bg-stone-50 text-stone-950">
+    <div className="relative z-0 h-screen overflow-x-hidden bg-stone-50 text-stone-950 transition-all duration-300 dark:bg-slate-900 dark:text-slate-200">
       <Background />
 
       <AppNav />

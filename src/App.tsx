@@ -25,14 +25,10 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Background />}> */}
           <Route index element={<Navigate replace to="homepage" />} />
           <Route path="homepage" element={<HomePage />} />
-          {/* <Route path="login" element={<LogIn />} /> */}
-          {/* <Route path="authentication" element={<Authentication />} /> */}
           <Route path="login" element={<NewLogin />} />
           <Route path="*" element={<PageNotFound />} />
-          {/* </Route> */}
 
           <Route
             path="map/:id"

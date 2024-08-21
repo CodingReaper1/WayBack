@@ -24,7 +24,7 @@ function NewInput<T extends FieldValues>({
   return (
     <input
       id={id}
-      className={`rounded-sm border-b-4   bg-zinc-800 pt-2 text-3xl text-white  outline-none outline-1 transition-all duration-500  ease-in-out focus:border-red-600  `}
+      className={`rounded-sm border-b-4   bg-slate-800 pt-2 text-3xl text-white  outline-none outline-1 transition-all duration-500  ease-in-out focus:border-red-600  `}
       {...register(id, {
         required: required ? "This field is required" : "",
         validate: validate,

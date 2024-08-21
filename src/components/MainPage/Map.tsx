@@ -121,7 +121,11 @@ function Map() {
           }
         }}
       >
-        {sideBarOpened ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        {sideBarOpened ? (
+          <ChevronRightIcon className="text-slate-900" />
+        ) : (
+          <ChevronLeftIcon className="text-slate-900" />
+        )}
       </button>
       {/* <Fakecoords /> */}
 

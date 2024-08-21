@@ -18,7 +18,7 @@ function LoginFormRow({ label, children, error }: LoginFormRowTypes) {
       {label && <label htmlFor={children?.props.id}>{label}</label>}
       {children}
       <p
-        className={`flex self-start   text-xl font-semibold  text-red-600 transition-all duration-300 sm:right-3 sm:top-6 md:absolute ${error ? "opacity-100" : "opacity-0"}  `}
+        className={`flex self-start   text-xl font-semibold  text-red-600 transition-all duration-300 sm:right-3 sm:top-7 md:absolute ${error ? "opacity-100" : "opacity-0"}  `}
       >
         {error}
       </p>

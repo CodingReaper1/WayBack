@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import toast from "react-hot-toast";
 
 import { useEffect } from "react";
 import { useUser } from "../hooks/useUser";
@@ -9,17 +8,8 @@ type ProtectedRouteTypes = {
 };
 
 function ProtectedRoute({ children }: ProtectedRouteTypes) {
-  // const { isAuthenticated } = useAuth();
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     toast.error("Log in your account first");
-  //     navigate("/");
-  //   }
-  // }, [isAuthenticated, navigate]);
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useUser();
-  // console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) navigate("/homepage");

@@ -1,5 +1,6 @@
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { memo, useState } from "react";
 import Button from "../Button";
@@ -61,9 +62,7 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
   function handleEditPlace() {}
 
   return (
-    <div
-      className={`flex  flex-col   rounded-md bg-zinc-700 p-5  transition-all`}
-    >
+    <div className={`flex  flex-col   rounded-md bg-slate-700 p-5  `}>
       <div className="relative flex justify-between">
         <h2
           className=" cursor-pointer content-center  overflow-hidden text-3xl "
@@ -81,7 +80,7 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
           </Button>
 
           <button
-            className=" cursor-pointer rounded-md p-2 transition-all duration-300 hover:bg-zinc-600"
+            className=" cursor-pointer rounded-md p-2 transition-all duration-300 hover:bg-slate-600"
             onClick={handleEllipsis}
           >
             <HiEllipsisVertical className="size-9" />
@@ -103,13 +102,21 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
         )}
       </div>
 
-      <p
-        className={`  overflow-hidden  duration-500 ${
-          openedDescription ? "max-h-96 pt-5 opacity-100" : " max-h-0 opacity-0"
-        }`}
+      <motion.p
+        className={`  overflow-hidden  break-words `}
+        initial={{ height: 0, padding: 0, opacity: 0 }}
+        animate={{
+          opacity: openedDescription ? 1 : 0,
+          minHeight: openedDescription ? "10rem" : 0,
+          padding: openedDescription ? "1.25rem 0 0 0" : 0,
+        }}
+        transition={{ duration: 0.3 }}
+        layout
       >
-        {placeInfo.description}
-      </p>
+        {placeInfo.description
+          ? placeInfo.description
+          : "Description was not written."}
+      </motion.p>
     </div>
   );
 }

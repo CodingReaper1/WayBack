@@ -55,6 +55,6 @@ export async function createSelectedPlaceApi({
     .from("selectedPlaces")
     .insert({ userID, coords, description, destination })
     .select();
-  console.log(error);
+  // console.log(error);
   return null;
 }
