@@ -26,12 +26,15 @@ function SignIn() {
     formState: { errors },
   } = useForm<OnSubmitTypes>();
 
-  const { signUpActive, signUp, isButtonReady } = useLoginContext();
+  const { signUpActive, signUp, isButtonReady, disableButton, enableButton } =
+    useLoginContext();
   const { logIn } = useLogIn();
 
   async function onSubmit(formData: OnSubmitTypes) {
+    disableButton();
     const { signInEmail: email, signInPassword: password } = formData;
     logIn({ email, password });
+    enableButton();
   }
 
   return (

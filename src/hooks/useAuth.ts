@@ -7,7 +7,7 @@ import useLoginContext from "../context/useLoginContext";
 
 function useAuth() {
   const navigate = useNavigate();
-  const { signIn, enableButton } = useLoginContext();
+  const { signIn } = useLoginContext();
 
   const { mutate: createAccount, isPending: isUploading } = useMutation({
     mutationFn: createAccountApi,
@@ -15,11 +15,9 @@ function useAuth() {
       navigate(`/map/${data.user.id}`);
       toast.success("Your account has been created!");
       signIn();
-      enableButton();
     },
     onError: (err) => {
       toast.error(err?.message);
-      enableButton();
     },
   });
 

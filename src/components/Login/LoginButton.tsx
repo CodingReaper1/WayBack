@@ -18,7 +18,7 @@ function LoginButton({ children, type, onClick, disabled }: LoginButtonTypes) {
           type === "transparent" ? "2px solid white" : "2px solid #dc2626",
       }}
       whileHover={{ scale: disabled ? 1 : 1.05 }}
-      className={`mt-20 flex items-center justify-center rounded-[0.8rem]  border-2 border-solid border-transparent px-[4.5rem] py-[1rem] text-xl  font-[600] uppercase tracking-widest text-white outline-none sm:mt-4  ${type === "transparent" ? "border-white bg-transparent" : " bg-red-600"} ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+      className={`mt-20 flex items-center justify-center gap-5 rounded-[0.8rem]  border-2 border-solid border-transparent  py-4 text-xl  font-semibold uppercase tracking-widest text-white outline-none sm:mt-4  ${type === "transparent" ? "border-white bg-transparent" : " bg-red-600"} ${disabled ? "cursor-not-allowed px-14" : "cursor-pointer px-[4.5rem]"}`}
       onClick={onClick}
       disabled={disabled}
       variants={{
@@ -26,11 +26,7 @@ function LoginButton({ children, type, onClick, disabled }: LoginButtonTypes) {
         show: { opacity: 1 },
       }}
     >
-      {disabled ? (
-        <div className="flex gap-5">Wait... {<Spinner type="small" />}</div>
-      ) : (
-        children
-      )}
+      {disabled ? <>Wait... {<Spinner type="small" />}</> : children}
     </motion.button>
   );
 }

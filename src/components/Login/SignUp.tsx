@@ -20,7 +20,7 @@ type OnSubmitTypes = {
 };
 
 function SignUp() {
-  const { signUpActive, isButtonReady, disableButton, signIn } =
+  const { signUpActive, isButtonReady, disableButton, enableButton, signIn } =
     useLoginContext();
   const {
     register,
@@ -42,10 +42,12 @@ function SignUp() {
     disableButton();
     const { data } = await validateEmail();
     if (data.data.status === "invalid") {
+      enableButton();
       return setError("signUpEmail", {
         message: "Invalid email try again",
       });
     }
+
     const {
       rePassword,
       signUpEmail: email,
@@ -54,6 +56,7 @@ function SignUp() {
     } = formData;
 
     createAccount({ email, password, ...dataToSubmit });
+    enableButton();
   }
 
   return (

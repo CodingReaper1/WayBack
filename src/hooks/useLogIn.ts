@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { logInApi } from "../services/apiDatabase";
+import useLoginContext from "../context/useLoginContext";
 
 function useLogIn() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { enableButton } = useLoginContext();
 
   const { isPending, mutate: logIn } = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
@@ -15,11 +17,12 @@ function useLogIn() {
       queryClient.setQueryData(["user"], user.user);
       toast.success("Successfully logged in!");
       navigate(`/map/${user.user.id}`);
-      // queryClient.invalidateQueries();
+      enableButton();
     },
     onError: (err) => {
       console.log(err);
       toast.error("Provided email or password is incorrect");
+      enableButton();
     },
   });
 

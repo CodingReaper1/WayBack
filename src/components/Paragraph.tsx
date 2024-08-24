@@ -11,7 +11,7 @@ function Paragraph({ children, className, page }: ParagraphTypes) {
   const variantStyles = {
     Homepage: tw(`text-2xl font-semibold lg:text-3xl`),
     Login: tw(
-      `mr-[2rem] text-[1.4rem] font-semibold tracking-wider sm:text-2xl lg:text-2xl`,
+      `mr-[2rem] text-3xl font-semibold tracking-wider sm:text-2xl lg:text-2xl`,
     ),
   };
 

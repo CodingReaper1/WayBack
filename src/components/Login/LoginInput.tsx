@@ -49,7 +49,7 @@ function Input<T extends FieldValues>({
         },
       }}
       id={id}
-      className={`darkplaceholder-slate-900 w-full  rounded-xl bg-[#eee] px-8  py-6 text-2xl placeholder-slate-400 outline-none dark:bg-slate-900 dark:focus:bg-slate-900 ${error ? "border border-red-600" : "border-none"}`}
+      className={`darkplaceholder-slate-900 w-full  rounded-xl bg-[#eee] px-8 py-8  text-3xl placeholder-slate-400 outline-none dark:bg-slate-900 dark:focus:bg-slate-900 sm:py-6 sm:text-2xl ${error ? "border border-red-600" : "border-none"}`}
       {...register(id, {
         required: required && "Required",
         validate: validate,
