@@ -61,8 +61,11 @@ function SignUp() {
 
   return (
     <motion.div
-      className={`absolute top-[5rem] z-20 w-full xxs:px-1  xs:px-12 sm:left-0 sm:top-0 sm:h-full sm:w-1/2  sm:px-0   `}
-      initial={{ visibility: "hidden" }}
+      className={`absolute top-1/2 z-20 h-auto w-full xxs:px-1  xs:px-6 sm:left-0 sm:top-0 sm:h-full sm:w-1/2  sm:px-0   `}
+      initial={{
+        visibility: "hidden",
+        y: window.innerWidth > 640 ? 0 : "-50%",
+      }}
       animate={{
         x: signUpActive && window.innerWidth > 640 ? "100%" : 0,
         opacity: signUpActive ? [0, 0, 1, 1] : [1, 1, 0, 0],

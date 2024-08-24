@@ -39,8 +39,8 @@ function SignIn() {
 
   return (
     <motion.div
-      className=" absolute top-[20rem] z-[20] h-96 w-full xxs:px-1  xs:px-12 sm:left-0 sm:top-0 sm:h-full sm:w-1/2 sm:px-0 "
-      initial={{ x: 0 }}
+      className=" absolute top-1/2 z-[20]   w-full  xxs:px-1  xs:px-6 sm:left-0 sm:top-0 sm:h-full sm:w-1/2 sm:px-0 "
+      initial={{ x: 0, y: window.innerWidth > 640 ? 0 : "-50%" }}
       animate={{
         x: window.innerWidth > 640 ? (signUpActive ? "100%" : 0) : 0,
         opacity: signUpActive ? [1, 1, 0, 0] : [0, 0, 1, 1],
