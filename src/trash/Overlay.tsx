@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import useMainPageContext from "../context/useMainPageContext";
 
 function Overlay() {
-  const { closeModal } = useMainPageContext();
+  // const { closeModal } = useMainPageContext();
 
   return createPortal(
     <div
