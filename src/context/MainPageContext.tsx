@@ -1,15 +1,11 @@
 import { createContext, useReducer } from "react";
 
 type MainPageContextTypes = {
-  smallModalOpened: boolean;
-  openId: number;
   sideBarFormOpen: boolean;
   routeLocked: boolean;
   lockedId: number;
   sideBarOpened: boolean;
 
-  openModal: (data: number) => void;
-  closeModal: () => void;
   openSideBar: () => void;
   closeSideBar: () => void;
   lockRoute: (data: number) => void;
@@ -19,8 +15,6 @@ type MainPageContextTypes = {
 };
 
 type InitalStateTypes = {
-  smallModalOpened: boolean;
-  openId: number;
   sideBarFormOpen: boolean;
   routeLocked: boolean;
   lockedId: number;
@@ -33,12 +27,11 @@ type WithoutPayloadAction = {
     | "MainPage/closeSideBar"
     | "MainPage/openSideBarForm"
     | "MainPage/closeSideBarForm"
-    | "MainPage/closeModal"
     | "MainPage/unlockRoute";
 };
 
 type WithNumberPayloadAction = {
-  type: "MainPage/openModal" | "MainPage/lockRoute";
+  type: "MainPage/lockRoute";
   payload: number;
 };
 
@@ -47,8 +40,6 @@ type ActionTypes = WithoutPayloadAction | WithNumberPayloadAction;
 const MainPageContext = createContext<MainPageContextTypes | null>(null);
 
 const initalState: InitalStateTypes = {
-  smallModalOpened: false,
-  openId: 0,
   sideBarFormOpen: false,
   routeLocked: false,
   lockedId: -1,
@@ -60,12 +51,6 @@ function reducer(
   action: ActionTypes,
 ): InitalStateTypes {
   switch (action.type) {
-    case "MainPage/openModal":
-      return { ...state, openId: action.payload, smallModalOpened: true };
-
-    case "MainPage/closeModal":
-      return { ...state, smallModalOpened: false };
-
     case "MainPage/openSideBar":
       return { ...state, sideBarOpened: true };
 
@@ -90,25 +75,8 @@ function reducer(
 }
 
 function MainPageProvider({ children }: { children: React.ReactNode }) {
-  const [
-    {
-      smallModalOpened,
-      openId,
-      sideBarFormOpen,
-      routeLocked,
-      lockedId,
-      sideBarOpened,
-    },
-    dispatch,
-  ] = useReducer(reducer, initalState);
-
-  function openModal(data: number) {
-    dispatch({ type: "MainPage/openModal", payload: data });
-  }
-
-  function closeModal() {
-    dispatch({ type: "MainPage/closeModal" });
-  }
+  const [{ sideBarFormOpen, routeLocked, lockedId, sideBarOpened }, dispatch] =
+    useReducer(reducer, initalState);
 
   function openSideBar() {
     dispatch({ type: "MainPage/openSideBar" });
@@ -137,15 +105,11 @@ function MainPageProvider({ children }: { children: React.ReactNode }) {
   return (
     <MainPageContext.Provider
       value={{
-        smallModalOpened,
         sideBarFormOpen,
-        openId,
         routeLocked,
         lockedId,
         sideBarOpened,
 
-        openModal,
-        closeModal,
         openSideBar,
         closeSideBar,
         lockRoute,

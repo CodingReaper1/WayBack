@@ -13,8 +13,10 @@ import useCreateSelectedPlace from "../../hooks/useCreateSelectedPlace.js";
 import useReadSelectedPlaces from "../../hooks/useReadSelectedPlaces.js";
 import StartSelecting from "./StartSelecting.js";
 import useLogout from "../../hooks/useLogout.js";
+import Menus from "../Menus.js";
 
 type PlaceTypes = {
+  id: number;
   destination: string;
   description: string;
   userID: string;
@@ -118,18 +120,20 @@ function Aside() {
           </div>
         </Form>
 
-        {loadingPlaces ? (
-          <Spinner type="big" center={true} />
-        ) : !(selectedPlaces.length === 0) ? (
-          selectedPlaces
-            .slice()
-            .reverse()
-            .map((place: PlaceTypes, index: number) => (
-              <SideBarRow placeInfo={place} key={index} id={index} />
-            ))
-        ) : (
-          <StartSelecting />
-        )}
+        <Menus>
+          {loadingPlaces ? (
+            <Spinner type="big" center={true} />
+          ) : !(selectedPlaces.length === 0) ? (
+            selectedPlaces
+              .slice()
+              .reverse()
+              .map((place: PlaceTypes, index: number) => (
+                <SideBarRow placeInfo={place} key={index} id={index} />
+              ))
+          ) : (
+            <StartSelecting />
+          )}
+        </Menus>
       </div>
     </motion.aside>
   );

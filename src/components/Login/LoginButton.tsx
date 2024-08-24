@@ -18,7 +18,7 @@ function LoginButton({ children, type, onClick, disabled }: LoginButtonTypes) {
           type === "transparent" ? "2px solid white" : "2px solid #dc2626",
       }}
       whileHover={{ scale: disabled ? 1 : 1.05 }}
-      className={`mt-20 rounded-[0.8rem]   border-2 border-solid border-transparent px-[4.5rem] py-[1rem] text-xl  font-[600] uppercase tracking-widest text-white outline-none sm:mt-4  ${type === "transparent" ? "border-white bg-transparent" : " bg-red-600"} ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+      className={`mt-20 flex items-center justify-center rounded-[0.8rem]  border-2 border-solid border-transparent px-[4.5rem] py-[1rem] text-xl  font-[600] uppercase tracking-widest text-white outline-none sm:mt-4  ${type === "transparent" ? "border-white bg-transparent" : " bg-red-600"} ${disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
       onClick={onClick}
       disabled={disabled}
       variants={{

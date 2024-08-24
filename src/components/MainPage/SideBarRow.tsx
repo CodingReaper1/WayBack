@@ -1,15 +1,17 @@
-import { HiEllipsisVertical } from "react-icons/hi2";
+import { HiEllipsisVertical, HiPencilSquare, HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { memo, useState } from "react";
 import Button from "../Button";
-import SmallModal from "../SmallModal";
-import Overlay from "../Overlay";
+// import SmallModal from "../SmallModal";
+// import Overlay from "../Overlay";
 import useMainPageContext from "../../context/useMainPageContext";
+import Menus from "../Menus";
 
 type SideBarRowTypes = {
   placeInfo: {
+    id: number;
     destination: string;
     description: string;
     userID: string;
@@ -19,34 +21,13 @@ type SideBarRowTypes = {
 };
 
 function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
-  const {
-    smallModalOpened,
-    openId,
-    lockedId,
-    routeLocked,
-    openModal,
-    closeSideBar,
-    lockRoute,
-    unlockRoute,
-  } = useMainPageContext();
+  console.log(placeInfo);
+  console.log(id);
+  const { lockedId, routeLocked, closeSideBar, lockRoute, unlockRoute } =
+    useMainPageContext();
 
   const [openedDescription, setOpenedDescription] = useState(false);
-  const [smallModalPosition, setSmallModalPosition] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
-
-  function handleEllipsis(e: React.MouseEvent<HTMLButtonElement>) {
-    const target = e.target as HTMLElement;
-    const button = target.closest("button");
-    if (!button) return;
-
-    const rect = button.getBoundingClientRect();
-    setSmallModalPosition({
-      x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height + 8,
-    });
-
-    openModal(id);
-  }
 
   function handleFind() {
     if (routeLocked && id === lockedId) return unlockRoute();
@@ -79,27 +60,18 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
             {lockedId === id && routeLocked ? "Unlock" : "Find"}
           </Button>
 
-          <button
-            className=" cursor-pointer rounded-md p-2 transition-all duration-300 hover:bg-slate-600"
-            onClick={handleEllipsis}
-          >
+          <Menus.Toggle id={String(id)}>
             <HiEllipsisVertical className="size-9" />
-          </button>
+          </Menus.Toggle>
+          <Menus.List id={String(id)}>
+            <Menus.Button icon={<HiPencilSquare className="text-slate-400" />}>
+              Edit
+            </Menus.Button>
+            <Menus.Button icon={<HiTrash className="text-slate-400" />}>
+              Delete
+            </Menus.Button>
+          </Menus.List>
         </div>
-
-        {smallModalOpened && openId === id && (
-          <>
-            <Overlay />
-            <SmallModal smallModalPosition={smallModalPosition}>
-              <Button type="mainpage/link" onClick={handleDeletePlace}>
-                Delete
-              </Button>
-              <Button type="mainpage/link" onClick={handleEditPlace}>
-                Edit
-              </Button>
-            </SmallModal>
-          </>
-        )}
       </div>
 
       <motion.p
