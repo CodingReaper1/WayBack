@@ -55,33 +55,6 @@ function SignIn() {
     >
       <Form onSubmit={handleSubmit(onSubmit)} page="Login">
         <HOne page="Login">Sign In</HOne>
-        {/* <div className="social-icons my-8">
-          <a
-            href="#"
-            className="mx-1 mb-[1rem] mt-[1.5rem] inline-flex h-16 w-16 items-center justify-center rounded-[20%] border-2 border-solid border-[#ccc] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-google-plus-g"></i>
-          </a>
-          <a
-            href="#"
-            className="mx-1 mb-[1rem] mt-[1.5rem] inline-flex h-16 w-16 items-center justify-center rounded-[20%] border-2 border-solid border-[#ccc] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-facebook-f"></i>
-          </a>
-          <a
-            href="#"
-            className="mx-1 mb-[1rem] mt-[1.5rem] inline-flex h-16 w-16 items-center justify-center rounded-[20%] border-2 border-solid border-[#ccc] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-github"></i>
-          </a>
-          <a
-            href="#"
-            className="mx-1 mb-[1rem] mt-[1.5rem] inline-flex h-16 w-16 items-center justify-center rounded-[20%] border-2 border-solid border-[#ccc] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-linkedin-in"></i>
-          </a>
-        </div> */}
-        {/* <span className="text-xl">or use your own email password</span> */}
         <LoginFormRow error={errors?.signInEmail?.message}>
           <LoginInput
             error={errors?.signInEmail?.message}

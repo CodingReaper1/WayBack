@@ -27,6 +27,7 @@ function SignUp() {
     handleSubmit,
     setError,
     getValues,
+    reset,
     formState: { errors },
   } = useForm<OnSubmitTypes>();
 
@@ -34,14 +35,14 @@ function SignUp() {
 
   const { validateEmail, isValidatingEmail } = useValidateEmail(email);
 
-  const { createAccount, isUploading } = useAuth();
+  const { createAccount, isUploading } = useAuth(reset, setEmail);
 
   const isReady = isValidatingEmail || isUploading;
 
   async function onSubmit(formData: OnSubmitTypes) {
     disableButton();
     const { data } = await validateEmail();
-    if (data.data.status === "invalid") {
+    if (data?.data?.status !== "valid") {
       enableButton();
       return setError("signUpEmail", {
         message: "Invalid email try again",
@@ -82,33 +83,6 @@ function SignUp() {
     >
       <Form onSubmit={handleSubmit(onSubmit)} page="Login">
         <HOne page="Login">Create account</HOne>
-        {/* <div className="social-icons my-8">
-          <a
-            href="#"
-            className="mb-[1rem] mt-[1.5rem] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-google-plus-g"></i>
-          </a>
-          <a
-            href="#"
-            className=" mb-[1rem] mt-[1.5rem] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-facebook-f"></i>
-          </a>
-          <a
-            href="#"
-            className="mb-[1rem] mt-[1.5rem] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-github"></i>
-          </a>
-          <a
-            href="#"
-            className="mb-[1rem] mt-[1.5rem] text-xl text-[#333] no-underline"
-          >
-            <i className="fa-brands fa-linkedin-in"></i>
-          </a>
-        </div>
-        <span className="text-xl">or use your own email for registration</span> */}
         <LoginFormRow error={errors?.firstName?.message}>
           <LoginInput
             error={errors?.firstName?.message}

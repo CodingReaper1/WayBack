@@ -9,6 +9,7 @@ import MainPage from "./pages/MainPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NewLogin from "./pages/NewLogin";
 import DarkModeToggle from "./components/HomePage/DarkModeToggle";
+import Confirm from "./pages/Confirm";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,8 @@ function App() {
           <Route path="homepage" element={<HomePage />} />
           <Route path="login" element={<NewLogin />} />
           <Route path="*" element={<PageNotFound />} />
+
+          <Route path="confirm" element={<Confirm />} />
 
           <Route
             path="map/:id"

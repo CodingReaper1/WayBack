@@ -10,6 +10,7 @@ type ProtectedRouteTypes = {
 function ProtectedRoute({ children }: ProtectedRouteTypes) {
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useUser();
+  console.log(isAuthenticated);
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) navigate("/homepage");

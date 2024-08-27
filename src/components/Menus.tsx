@@ -34,7 +34,6 @@ function Menus({ children }: { children: React.ReactNode }) {
 
   const close = () => setOpenId("");
   const open = setOpenId;
-  console.log(openId);
 
   return (
     <MenusContext.Provider

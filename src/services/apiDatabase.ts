@@ -30,7 +30,7 @@ export async function logoutApi() {
 export async function getCurrentUserApi() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;
-
+  console.log("queryRefetched");
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(`Error: ${error.message}`);
@@ -60,9 +60,9 @@ export async function createAccountApi({
     options: {
       data: {
         firstName,
-        // lastName,
         displayName: firstName,
       },
+      emailRedirectTo: `http://localhost:5173/confirm`,
     },
   });
 
