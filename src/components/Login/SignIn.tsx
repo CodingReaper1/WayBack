@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import useLoginContext from "../../context/useLoginContext";
 import LoginInput from "./LoginInput";
@@ -13,7 +14,7 @@ import Paragraph from "../Paragraph";
 type OnSubmitTypes = {
   signInEmail: string;
   signInPassword: string;
-  register: UseFormRegister<FieldValues>;
+  // register: UseFormRegister<FieldValues>;
 };
 
 function SignIn() {
@@ -55,6 +56,20 @@ function SignIn() {
     >
       <Form onSubmit={handleSubmit(onSubmit)} page="Login">
         <HOne page="Login">Sign In</HOne>
+
+        <a
+          href="#"
+          className="mx-1 mb-4 flex w-[50rem] items-center justify-center gap-5 rounded-xl border-2 border-solid border-slate-300 py-4 text-3xl font-medium transition-all duration-300 hover:scale-[1.01] hover:bg-slate-50 hover:shadow-md dark:hover:bg-slate-900"
+        >
+          <i className="fa-brands fa-github  text-5xl text-black"></i>
+          Continue using github
+        </a>
+
+        <div className="flex w-full items-center">
+          <div className="flex-grow border-t border-stone-700 dark:border-stone-400"></div>
+          <span className="mx-4">or</span>
+          <div className="flex-grow border-t border-stone-700 dark:border-stone-400"></div>
+        </div>
         <LoginFormRow error={errors?.signInEmail?.message}>
           <LoginInput
             error={errors?.signInEmail?.message}
@@ -83,7 +98,7 @@ function SignIn() {
             show: { opacity: 1 },
           }}
         >
-          Forget Your Password?
+          <Link to="/password-recovery">Forget Your Password?</Link>
         </motion.a>
 
         <LoginButton disabled={isButtonReady}>Sign In</LoginButton>

@@ -4,7 +4,7 @@ import { tw } from "../utils/tw";
 type ParagraphTypes = {
   children: React.ReactNode;
   className?: string;
-  page: "Homepage" | "Login";
+  page: "Homepage" | "Login" | "PasswordRecovery";
 };
 
 function Paragraph({ children, className, page }: ParagraphTypes) {
@@ -13,6 +13,7 @@ function Paragraph({ children, className, page }: ParagraphTypes) {
     Login: tw(
       `mr-[2rem] text-[1.8rem] font-semibold tracking-wider sm:text-2xl lg:text-2xl`,
     ),
+    PasswordRecovery: tw(`self-start text-2xl font-medium`),
   };
 
   return (

@@ -5,7 +5,7 @@ import DarkModeToggle from "./DarkModeToggle";
 
 function AppNav() {
   return (
-    <nav className=" relative z-10 w-screen border-b border-stone-300 px-20 py-3 text-3xl font-semibold  lg:text-4xl">
+    <nav className=" relative z-10 w-screen border-b border-stone-300 px-2 py-3 text-3xl font-semibold xxs:px-4 sm:px-20  lg:text-4xl">
       <ul className="flex items-center  justify-between ">
         <li className="">
           <Button type="navlink" to="/homepage">
@@ -16,7 +16,7 @@ function AppNav() {
 
         <div className="flex gap-5">
           <li>
-            <DarkModeToggle  />
+            <DarkModeToggle />
           </li>
 
           <li className="flex items-center ">

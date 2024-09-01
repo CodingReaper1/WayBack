@@ -19,7 +19,7 @@ function DarkModeToggle({ display = true }: DarkModeToggleTypes) {
       className={`h-20 w-20  cursor-pointer overflow-hidden rounded-md p-2 transition-all duration-300 ${display ? "" : "hidden"}`}
       onClick={toggleDarkMode}
     >
-      {isDarkMode ? <img src="sun.png" /> : <img src="moon.png " />}
+      {isDarkMode ? <img src="/sun.png" /> : <img src="/moon.png " />}
     </button>
   );
 }

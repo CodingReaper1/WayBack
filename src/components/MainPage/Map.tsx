@@ -30,7 +30,6 @@ function Map() {
   } = useMainPageContext();
   const { map, saveMap } = useMapContext();
   const { myPosition } = useMyPositionContext();
-  useGetRoute();
 
   const [searchParams] = useSearchParams();
   const lat: string | null = searchParams?.get("lat");
@@ -42,6 +41,7 @@ function Map() {
   const [heading, setHeading] = useState(0);
   const [starterDeg, setStarterDeg] = useState(0);
   useGeoloacationData(heading, setHeading);
+  useGetRoute();
 
   const triangleIcon = L.divIcon({
     className: "",

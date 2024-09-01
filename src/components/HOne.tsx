@@ -3,7 +3,7 @@ import { tw } from "../utils/tw";
 
 type HOneTypes = {
   children: React.ReactNode;
-  page: "Homepage" | "Login";
+  page: "Homepage" | "Login" | "PasswordRecovery";
 };
 
 function HOne({ children, page }: HOneTypes) {
@@ -13,6 +13,7 @@ function HOne({ children, page }: HOneTypes) {
     Login: tw(
       `mb-10 mt-10 text-5xl xxs:text-6xl sm:text-5xl md:mb-20 md:text-6xl lg:text-[5rem]`,
     ),
+    PasswordRecovery: tw(`self-start text-5xl sm:text-6xl `),
   };
 
   return (

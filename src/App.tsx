@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NewLogin from "./pages/NewLogin";
 import DarkModeToggle from "./components/HomePage/DarkModeToggle";
 import Confirm from "./pages/Confirm";
+import PasswordRecovery from "./pages/PasswordRecovery";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +36,8 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
 
           <Route path="confirm" element={<Confirm />} />
+          <Route path="password-recovery" element={<PasswordRecovery />} />
+          <Route path="reset-password" element={<ResetPassword />} />
 
           <Route
             path="map/:id"

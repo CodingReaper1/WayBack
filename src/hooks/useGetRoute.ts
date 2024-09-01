@@ -73,7 +73,7 @@ function useGetRoute() {
   const { myPosition } = useMyPositionContext();
 
   const { refetch: refetchMapRoute } = useQuery({
-    queryKey: ["u", lat, lng, myPosition[0], myPosition[1]],
+    queryKey: ["route", lat, lng, myPosition[0], myPosition[1]],
     queryFn: async () => {
       try {
         const data = await updateRouteApi({ myPosition, lat, lng });

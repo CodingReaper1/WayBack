@@ -11,6 +11,11 @@ type CreateAccountTypes = {
   password: string;
 };
 
+type ResetPasswordTypes = {
+  password: string;
+  retrievedEmail: string;
+};
+
 export async function logInApi({ email, password }: LogInTypes) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -30,12 +35,45 @@ export async function logoutApi() {
 export async function getCurrentUserApi() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;
-  console.log("queryRefetched");
+
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(`Error: ${error.message}`);
 
   return data?.user;
+}
+
+export async function resetPasswordApi({
+  password,
+  retrievedEmail,
+}: ResetPasswordTypes) {
+  const { data, error } = await supabase.auth.updateUser({
+    email: retrievedEmail,
+    password: password,
+  });
+  console.log(data);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function sendResetPasswordEmailApi(email: string) {
+  const { data: userData, error: userError } =
+    await supabase.auth.admin.listUsers();
+
+  if (!userData.users.some((user) => user.email === email))
+    throw new Error(`Theres nobody registered with that email`);
+
+  if (userError) throw new Error(userError.message);
+
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `http://localhost:5173/reset-password?email=${encodeURIComponent(email)}`,
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
 }
 
 export async function createAccountApi({
