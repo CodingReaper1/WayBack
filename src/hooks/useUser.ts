@@ -10,8 +10,6 @@ export function useUser() {
   } = useQuery({
     queryKey: ["user"],
     queryFn: getCurrentUserApi,
-    // refetchInterval: 1000,
-    // enabled: !user.isread,
   });
 
   return {

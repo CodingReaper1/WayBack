@@ -1,5 +1,8 @@
 import supabase from "./supabase";
 
+const MAINURL = "https://waybackk.netlify.app";
+// const MAINURL = "http://localhost:5173";
+
 type LogInTypes = {
   email: string;
   password: string;
@@ -68,7 +71,7 @@ export async function sendResetPasswordEmailApi(email: string) {
   if (userError) throw new Error(userError.message);
 
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `http://localhost:5173/reset-password?email=${encodeURIComponent(email)}`,
+    redirectTo: `${MAINURL}/reset-password?email=${encodeURIComponent(email)}`,
   });
 
   if (error) throw new Error(error.message);
@@ -100,17 +103,41 @@ export async function createAccountApi({
         firstName,
         displayName: firstName,
       },
-      emailRedirectTo: `http://localhost:5173/confirm`,
+      emailRedirectTo: `${MAINURL}/confirm`,
     },
   });
 
-  if (error) {
-    throw new Error(`Error: ${error.message}`);
-  }
+  if (error) throw new Error(`Error: ${error.message}`);
 
   if (!data.user || !data.user.id) {
     throw new Error("Error: No user ID returned");
   }
 
   return { user: { id: data.user.id } };
+}
+
+export async function signInWithGithubApi() {
+  const {
+    // data, (seems nothing important)
+    error,
+  } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: `${MAINURL}/confirm`,
+    },
+  });
+
+  if (error) throw new Error(`Error: ${error.message}`);
+}
+
+export async function updateUserApi() {
+  // if (user) {
+  //   const { error: updateError } = await supabase.auth.updateUser({
+  //     data: {
+  //       firstName: "John",
+  //     },
+  //   });
+  //   if (updateError)
+  //     throw new Error(`Error updating user: ${updateError.message}`);
+  // }
 }
