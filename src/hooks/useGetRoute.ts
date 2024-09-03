@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 
 import useMapContext from "../context/useMapContext";
 import useMyPositionContext from "../context/useMyPositionContext";
+import useUpdateRouteUsage from "./useUpdateRouteUsage";
 // import { useEffect } from "react";
 
 // function useGetRoute() {
@@ -68,12 +69,13 @@ function useGetRoute() {
   const lat: string | null = searchParams?.get("lat");
   const lng: string | null = searchParams?.get("lng");
   // const queryClient = useQueryClient();
+  const { updateRouteUsage } = useUpdateRouteUsage();
 
   const { map } = useMapContext();
   const { myPosition } = useMyPositionContext();
 
   const { refetch: refetchMapRoute } = useQuery({
-    queryKey: ["route", lat, lng, myPosition[0], myPosition[1]],
+    queryKey: ["updateRoute", lat, lng, myPosition[0], myPosition[1]],
     queryFn: async () => {
       try {
         const data = await updateRouteApi({ myPosition, lat, lng });
@@ -89,6 +91,7 @@ function useGetRoute() {
         );
 
         map.routePolyline = routePolyline;
+        updateRouteUsage();
 
         // queryClient.invalidateQueries({
         //   queryKey: ["u"],

@@ -1,4 +1,4 @@
-import useLocalStorageState from "../../hooks/useLocalStorageState";
+import useDarkModeContext from "../../context/useDarkModeContext";
 import { useEffect } from "react";
 
 type DarkModeToggleTypes = {
@@ -6,10 +6,7 @@ type DarkModeToggleTypes = {
 };
 
 function DarkModeToggle({ display = true }: DarkModeToggleTypes) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(false, "isDarkMode");
-  function toggleDarkMode() {
-    setIsDarkMode((isDark: boolean) => !isDark);
-  }
+  const { isDarkMode, toggleDarkMode } = useDarkModeContext();
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);

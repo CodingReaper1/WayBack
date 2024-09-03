@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 
 import { memo, useState } from "react";
 import Button from "../Button";
-// import SmallModal from "../SmallModal";
-// import Overlay from "../Overlay";
 import useMainPageContext from "../../context/useMainPageContext";
 import Menus from "../Menus";
 
@@ -21,8 +19,8 @@ type SideBarRowTypes = {
 };
 
 function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
-  console.log(placeInfo);
-  console.log(id);
+  // console.log(placeInfo);
+  // console.log(id);
   const { lockedId, routeLocked, closeSideBar, lockRoute, unlockRoute } =
     useMainPageContext();
 

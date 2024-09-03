@@ -20,7 +20,12 @@ function AppNav() {
           </li>
 
           <li className="flex items-center ">
-            <Button type="navlink" className={"md:inline"} to="/login">
+            <Button
+              type="homepage"
+              size="small"
+              className={"md:inline"}
+              to="/login"
+            >
               Sign in
             </Button>
           </li>

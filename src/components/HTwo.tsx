@@ -1,17 +1,15 @@
 import { motion } from "framer-motion";
 import { tw } from "../utils/tw";
 
-type HOneTypes = {
+type HTwoTypes = {
   children: React.ReactNode;
   page: "Homepage" | "Login" | "PasswordRecovery";
 };
 
-function HOne({ children, page }: HOneTypes) {
+function HTwo({ children, page }: HTwoTypes) {
   const variantStyles = {
-    common: tw(` flex justify-center font-bold  `),
-    Homepage: tw(
-      `mb-14 mt-20 text-5xl xxs:text-6xl md:text-7xl lg:text-8xl xl:text-9xl`,
-    ),
+    common: tw(`  font-bold  `),
+    Homepage: tw(` sm:text-6xl md:text-6xl lg:text-7xl  `),
     Login: tw(
       `mb-10 mt-10 text-5xl xxs:text-6xl sm:text-5xl md:mb-20 md:text-6xl lg:text-[5rem]`,
     ),
@@ -19,7 +17,7 @@ function HOne({ children, page }: HOneTypes) {
   };
 
   return (
-    <motion.h1
+    <motion.h2
       className={`${variantStyles.common} ${variantStyles[page]}`}
       variants={{
         hidden: { opacity: 0 },
@@ -27,8 +25,8 @@ function HOne({ children, page }: HOneTypes) {
       }}
     >
       {children}
-    </motion.h1>
+    </motion.h2>
   );
 }
 
-export default HOne;
+export default HTwo;

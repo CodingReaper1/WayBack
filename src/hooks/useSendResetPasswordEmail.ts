@@ -7,7 +7,6 @@ function useSendResetPasswordEmail() {
   const { enableButton } = useLoginContext();
 
   const { data, mutate: sendResetPasswordEmail } = useMutation({
-    mutationKey: ["sendResetPasswordEmail"],
     mutationFn: sendResetPasswordEmailApi,
     onSuccess: () => {
       toast.success(`Password recovery email has been sent.`);

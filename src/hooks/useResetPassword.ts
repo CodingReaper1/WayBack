@@ -9,7 +9,6 @@ function useResetPassword() {
   const navigate = useNavigate();
 
   const { data, mutate: resetPassword } = useMutation({
-    mutationKey: ["resetPassword"],
     mutationFn: resetPasswordApi,
     onSuccess: () => {
       toast.success(`Password has been reset sussefully!`);

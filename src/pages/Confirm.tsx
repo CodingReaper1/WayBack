@@ -12,7 +12,7 @@ function Confirm() {
       navigate(`/map/${user.id}`);
       signIn();
     } else {
-      console.log("error on confirm page");
+      // console.log("error on confirm page");
       // refetch();
     }
   }, [isAuthenticated, user, navigate, signIn, refetch]);
