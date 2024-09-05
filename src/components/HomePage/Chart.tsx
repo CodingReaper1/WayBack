@@ -46,9 +46,9 @@ function Chart() {
     .reverse();
 
   return (
-    <div className="px-15 col-span-full w-full bg-white pb-5 pt-14 dark:bg-slate-950">
+    <div className=" col-span-full w-full bg-white  dark:bg-slate-950">
       <ResponsiveContainer height={300} width="100%">
-        <AreaChart data={data} className="p-4">
+        <AreaChart data={data} className="pb-2 pt-14">
           <XAxis
             dataKey="label"
             interval={filterValue === "7" ? 0 : interval}
