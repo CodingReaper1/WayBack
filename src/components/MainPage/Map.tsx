@@ -21,84 +21,84 @@ import useGetRoute from "../../hooks/useGetRoute";
 // import Fakecoords from "./Fakecoords";
 
 function Map() {
-  const {
-    routeLocked,
-    sideBarOpened,
-    openSideBar,
-    openSideBarForm,
-    closeSideBar,
-  } = useMainPageContext();
-  const { map, saveMap } = useMapContext();
-  const { myPosition } = useMyPositionContext();
+  // const {
+  //   routeLocked,
+  //   sideBarOpened,
+  //   openSideBar,
+  //   openSideBarForm,
+  //   closeSideBar,
+  // } = useMainPageContext();
+  // const { map, saveMap } = useMapContext();
+  // const { myPosition } = useMyPositionContext();
 
-  const [searchParams] = useSearchParams();
-  const lat: string | null = searchParams?.get("lat");
-  const lng: string | null = searchParams?.get("lng");
+  // const [searchParams] = useSearchParams();
+  // const lat: string | null = searchParams?.get("lat");
+  // const lng: string | null = searchParams?.get("lng");
 
-  const { id } = useParams();
-  const navigate = useNavigate();
+  // const { id } = useParams();
+  // const navigate = useNavigate();
 
-  const [heading, setHeading] = useState(0);
-  const [starterDeg, setStarterDeg] = useState(0);
-  useGeoloacationData(heading, setHeading);
-  useGetRoute();
+  // const [heading, setHeading] = useState(0);
+  // const [starterDeg, setStarterDeg] = useState(0);
+  // useGeoloacationData(heading, setHeading);
+  // useGetRoute();
 
-  const triangleIcon = L.divIcon({
-    className: "",
-    html: `
-    <div class="flex items-center justify-center h-[12px] -rotate-90">
-      <img src="/right-arrow.png" class="w-12 h-12" style="
-        animation: spin 1s forwards ;
-      " />
-    </div>
-    <style>
-      @keyframes spin {
-        from {
-          transform: rotate(${starterDeg}deg);
-        }
-        to {
-          transform: rotate(${heading ? heading : 0}deg);
-        }
-      }
-    </style>
-    `,
-  });
+  // const triangleIcon = L.divIcon({
+  //   className: "",
+  //   html: `
+  //   <div class="flex items-center justify-center h-[12px] -rotate-90">
+  //     <img src="/right-arrow.png" class="w-12 h-12" style="
+  //       animation: spin 1s forwards ;
+  //     " />
+  //   </div>
+  //   <style>
+  //     @keyframes spin {
+  //       from {
+  //         transform: rotate(${starterDeg}deg);
+  //       }
+  //       to {
+  //         transform: rotate(${heading ? heading : 0}deg);
+  //       }
+  //     }
+  //   </style>
+  //   `,
+  // });
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setStarterDeg(heading ? heading : 0);
-  //   }, 1_000);
+  // // useEffect(() => {
+  // //   const timeout = setTimeout(() => {
+  // //     setStarterDeg(heading ? heading : 0);
+  // //   }, 1_000);
 
-  //   return () => clearTimeout(timeout);
-  // }, [heading]);
+  // //   return () => clearTimeout(timeout);
+  // // }, [heading]);
 
-  // For click event on map
-  function MapEvents() {
-    useMapEvents({
-      click(e) {
-        if (routeLocked)
-          return toast.error("Unlock to be able to add new locations");
-        navigate(`/map/${id}/?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
-        openSideBarForm();
-        openSideBar();
-      },
-    });
+  // // For click event on map
+  // function MapEvents() {
+  //   useMapEvents({
+  //     click(e) {
+  //       if (routeLocked)
+  //         return toast.error("Unlock to be able to add new locations");
+  //       navigate(`/map/${id}/?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+  //       openSideBarForm();
+  //       openSideBar();
+  //     },
+  //   });
 
-    return null;
-  }
+  //   return null;
+  // }
 
-  // For centering map on user
-  const UpdateMapCenter = useCallback(
-    ({ position }: { position: [number, number] }) => {
-      if (!map || !position || !routeLocked) return;
-      map.panTo(position, { animate: true, duration: 1 });
-      return null;
-    },
-    // [myPosition, routeLocked, map],
-    [routeLocked, map],
-  );
+  // // For centering map on user
+  // const UpdateMapCenter = useCallback(
+  //   ({ position }: { position: [number, number] }) => {
+  //     if (!map || !position || !routeLocked) return;
+  //     map.panTo(position, { animate: true, duration: 1 });
+  //     return null;
+  //   },
+  //   // [myPosition, routeLocked, map],
+  //   [routeLocked, map],
+  // );
 
-  const position = [51.505, -0.09];
+  const position: [number, number] = [51.505, -0.09];
   return (
     // <MapContainer
     //   // rotate={true}
