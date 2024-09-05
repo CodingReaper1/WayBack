@@ -28,7 +28,7 @@ function useGeoloacationData(
       },
       (error) => {
         console.error("Error getting current position:", error);
-        toast.error(`Geolocation error: ${error}`);
+        toast.error(`${error}`);
       },
       {
         enableHighAccuracy: true,

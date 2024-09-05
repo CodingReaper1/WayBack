@@ -2,7 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useSearchParams } from "react-router-dom";
 import { Map as LeafletMap } from "leaflet";
-import "leaflet-routing-machine";
+// import "leaflet-routing-machine";
 
 import useMapContext from "../../context/useMapContext";
 import useMyPositionContext from "../../context/useMyPositionContext";

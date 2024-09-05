@@ -1,7 +1,6 @@
 import L from "leaflet";
 import useGeoloacationData from "./useGeoloacationData";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 function useIcons(myPosition: [number, number]) {
   const [heading, setHeading] = useState(0);
