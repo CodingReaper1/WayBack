@@ -47,7 +47,7 @@ function Chart() {
 
   return (
     <div className=" col-span-full w-full bg-white  dark:bg-slate-950">
-      <ResponsiveContainer height={300} width="100%" className=" pb-2 pt-14">
+      <ResponsiveContainer height={400} width="100%" className=" pb-2 pt-14">
         <AreaChart data={data}>
           <XAxis
             dataKey="label"
