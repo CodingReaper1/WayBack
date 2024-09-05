@@ -141,10 +141,13 @@ function Map() {
           {/* <Popup>
             <span className="text-2xl">Destination</span>
           </Popup> */}
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
         </Marker>
       )}
 
-      <Marker position={myPosition} icon={triangleIcon}></Marker>
+      {/* <Marker position={myPosition} icon={triangleIcon}></Marker> */}
     </MapContainer>
   );
 }
