@@ -5,14 +5,21 @@ import React from "react";
 
 type ButtonTypes = {
   children: React.ReactNode;
-  to?: string;
+  to?: string | null;
   type: string;
   onClick?: () => void;
   className?: string;
   size?: string;
 };
 
-function Button({ children, to, type, size, onClick, className }: ButtonTypes) {
+function Button({
+  children,
+  to = null,
+  type,
+  size,
+  onClick,
+  className,
+}: ButtonTypes) {
   const mainStyles =
     "transition-all duration-300 flex items-center justify-center rounded-lg font-medium";
 

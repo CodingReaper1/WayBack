@@ -47,13 +47,13 @@ function Map() {
         url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       />
 
-      {!lat || !lng || (
-        <Marker position={[+lat, +lng]} icon={mapPinIcon}>
-          <Popup>
-            <span className="text-2xl">Destination</span>
-          </Popup>
-        </Marker>
-      )}
+      {/* {!lat || !lng || ( */}
+      <Marker position={[+lat!, +lng!]} icon={mapPinIcon}>
+        <Popup>
+          <span className="text-2xl">Destination</span>
+        </Popup>
+      </Marker>
+      {/* )} */}
 
       <Marker position={myPosition} icon={myPositionIcon}></Marker>
     </MapContainer>

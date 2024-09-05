@@ -65,7 +65,7 @@ function Aside() {
   return (
     <motion.aside
       className={`relative  flex flex-col gap-24 overflow-y-auto bg-slate-800  text-2xl   text-white`}
-      initial={{ width: "36rem", padding: "2.5rem 2.4rem 2.5rem 2.4rem" }}
+      initial={{ width: "36rem", padding: "2.5rem 2rem 2.5rem 2rem" }}
       animate={{
         width:
           window.innerWidth > 640
@@ -75,7 +75,7 @@ function Aside() {
             : sideBarOpened
               ? "100vw"
               : "0",
-        padding: sideBarOpened ? "2.5rem 2.4rem 2.5rem 2.4rem" : "0",
+        padding: sideBarOpened ? "2.5rem 2rem 2.5rem 2rem" : "0",
       }}
       transition={{ duration: 0.3 }}
     >
@@ -84,7 +84,7 @@ function Aside() {
           Log out
         </Button>
         <Button
-          type="mainpage/link"
+          type="mainpage/find"
           className="sm:hidden"
           onClick={() => closeSideBar()}
         >
@@ -122,7 +122,7 @@ function Aside() {
             <NewInput type="text" id="description" register={register} />
           </NewFormRow>
 
-          <div className="flex gap-5">
+          <div className="flex gap-2 text-lg xxs:text-2xl xs:gap-5 xs:text-3xl">
             <Button type="mainpage">Save place</Button>
             <Button
               type="mainpage/cancelbtn"

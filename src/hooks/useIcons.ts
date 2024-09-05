@@ -12,7 +12,7 @@ function useIcons() {
   const mapPinIcon = L.divIcon({
     className: "",
     html: `
-       <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
+      <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
     `,
   });
 
