@@ -11,7 +11,7 @@ import useIcons from "../../hooks/useIcons";
 import UpdateMapCenter from "./UpdateMapCenter";
 import ChevronButton from "./ChevronButton";
 import MapEvents from "./MapEvents";
-import Fakecoords from "./Fakecoords";
+// import Fakecoords from "./Fakecoords";
 import useMainPageContext from "../../context/useMainPageContext";
 
 function Map() {
@@ -32,6 +32,7 @@ function Map() {
       doubleClickZoom={false}
       center={myPosition}
       zoom={8}
+      maxZoom={19}
       scrollWheelZoom={true}
       className={`h-screen w-screen ${!isMapEnabled ? "cursor-not-allowed" : ""}`}
       // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
@@ -44,10 +45,17 @@ function Map() {
 
       <UpdateMapCenter myPosition={myPosition} />
       <MapEvents />
+
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        maxZoom={19} // Ensure max zoom is set properly
       />
+      {/* <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.fr/">OSM France</a>'
+        url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
+        maxZoom={20}
+      /> */}
 
       {!lat || !lng || (
         <Marker position={[+lat, +lng]} icon={mapPinIcon}>
