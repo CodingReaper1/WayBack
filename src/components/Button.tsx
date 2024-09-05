@@ -36,7 +36,7 @@ function Button({ children, to, type, size, onClick, className }: ButtonTypes) {
       <button
         onClick={onClick}
         className={`
-          text-[1.75rem]  font-semibold outline-none hover:text-red-500
+          text-[1.75rem]  font-medium outline-none hover:text-red-500
           ${mainStyles} 
           ${className} 
         `}

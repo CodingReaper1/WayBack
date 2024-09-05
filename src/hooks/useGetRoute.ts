@@ -86,7 +86,7 @@ function useGetRoute() {
         const routePoints = polylineEncoded.decode(data.paths[0].points);
 
         if (map.routePolyline) map.removeLayer(map.routePolyline);
-        const routePolyline = L.polyline(routePoints, { color: "red" }).addTo(
+        const routePolyline = L.polyline(routePoints, { color: "blue" }).addTo(
           map,
         );
 

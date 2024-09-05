@@ -76,7 +76,7 @@ function SideBarRow({
             className={lockedId === id && routeLocked ? "text-red-600" : ""}
             onClick={handleFind}
           >
-            {lockedId === id && routeLocked ? "Unlock" : "Find"}
+            {lockedId === id && routeLocked ? "Unlock" : "LockIn"}
           </Button>
 
           <Menus.Menu>

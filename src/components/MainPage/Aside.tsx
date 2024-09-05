@@ -42,7 +42,7 @@ function Aside() {
 
   const { sideBarFormOpen, sideBarOpened, closeSideBar, closeSideBarForm } =
     useMainPageContext();
-  const { logout, isPending } = useLogout();
+  const { logout } = useLogout();
 
   const { selectedPlaces, loadingPlaces } = useReadSelectedPlaces(id);
   const { createSelectedPlace } = useCreateSelectedPlace(reset);

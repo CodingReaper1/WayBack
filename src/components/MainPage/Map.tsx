@@ -1,122 +1,28 @@
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMapEvents,
-} from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import L, { Map as LeafletMap } from "leaflet";
+import { useSearchParams } from "react-router-dom";
+import { Map as LeafletMap } from "leaflet";
 import "leaflet-routing-machine";
-import toast from "react-hot-toast";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { HiMapPin } from "react-icons/hi2";
 
-import { useCallback, useState } from "react";
-import useGeoloacationData from "../../hooks/useGeoloacationData";
 import useMapContext from "../../context/useMapContext";
 import useMyPositionContext from "../../context/useMyPositionContext";
-import useMainPageContext from "../../context/useMainPageContext";
 import useGetRoute from "../../hooks/useGetRoute";
+import useIcons from "../../hooks/useIcons";
+import UpdateMapCenter from "./UpdateMapCenter";
+import ChevronButton from "./ChevronButton";
+import MapEvents from "./MapEvents";
 // import Fakecoords from "./Fakecoords";
 
 function Map() {
-  const {
-    routeLocked,
-    sideBarOpened,
-    openSideBar,
-    openSideBarForm,
-    closeSideBar,
-  } = useMainPageContext();
-  const { map, saveMap } = useMapContext();
+  const { saveMap } = useMapContext();
   const { myPosition } = useMyPositionContext();
 
   const [searchParams] = useSearchParams();
   const lat: string | null = searchParams?.get("lat");
   const lng: string | null = searchParams?.get("lng");
 
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  const [heading, setHeading] = useState(0);
-  const [starterDeg, setStarterDeg] = useState(0);
-  useGeoloacationData(heading, setHeading);
   useGetRoute();
-
-  const triangleIcon = L.divIcon({
-    className: "",
-    html: `
-    <div class="flex items-center justify-center h-[12px] -rotate-90">
-      <img src="/right-arrow.png" class="w-12 h-12" style="
-        animation: spin 1s forwards ;
-      " />
-    </div>
-    <style>
-      @keyframes spin {
-        from {
-          transform: rotate(${starterDeg}deg);
-        }
-        to {
-          transform: rotate(${heading ? heading : 0}deg);
-        }
-      }
-    </style>
-    `,
-  });
-
-  const defaultIcon = L.divIcon({
-    className: "",
-    html: `
-    <div class="flex items-center justify-center h-[12px] -rotate-90">
-       ${(<HiMapPin className="mr-4 h-12 w-12 text-red-600" />)}
-    </div>
-    <style>
-      @keyframes spin {
-        from {
-          transform: rotate(${starterDeg}deg);
-        }
-        to {
-          transform: rotate(${heading ? heading : 0}deg);
-        }
-      }
-    </style>
-    `,
-  });
-
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setStarterDeg(heading ? heading : 0);
-  //   }, 1_000);
-
-  //   return () => clearTimeout(timeout);
-  // }, [heading]);
-
-  // For click event on map
-  function MapEvents() {
-    useMapEvents({
-      click(e) {
-        if (routeLocked)
-          return toast.error("Unlock to be able to add new locations");
-        navigate(`/map/${id}/?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
-        openSideBarForm();
-        openSideBar();
-      },
-    });
-
-    return null;
-  }
-
-  // For centering map on user
-  const UpdateMapCenter = useCallback(
-    ({ position }: { position: [number, number] }) => {
-      if (!map || !position || !routeLocked) return;
-      map.panTo(position, { animate: true, duration: 1 });
-      return null;
-    },
-    // [myPosition, routeLocked, map],
-    [routeLocked, map],
-  );
+  const { mapPinIcon, myPositionIcon } = useIcons();
 
   return (
     <MapContainer
@@ -131,25 +37,10 @@ function Map() {
         saveMap(startMap.target);
       }}
     >
-      <button
-        className={`absolute left-0 top-1/2 z-[999999] h-32 w-32 transition-all duration-300 hover:scale-[1.1]`}
-        onMouseDown={() => {
-          if (sideBarOpened) {
-            closeSideBar();
-          } else {
-            openSideBar();
-          }
-        }}
-      >
-        {sideBarOpened ? (
-          <ChevronLeftIcon className="text-slate-900" />
-        ) : (
-          <ChevronRightIcon className="text-slate-900" />
-        )}
-      </button>
+      <ChevronButton />
       {/* <Fakecoords /> */}
 
-      <UpdateMapCenter position={myPosition} />
+      <UpdateMapCenter myPosition={myPosition} />
       <MapEvents />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -157,14 +48,14 @@ function Map() {
       />
 
       {!lat || !lng || (
-        <Marker position={[+lat, +lng]} icon={defaultIcon}>
+        <Marker position={[+lat, +lng]} icon={mapPinIcon}>
           <Popup>
             <span className="text-2xl">Destination</span>
           </Popup>
         </Marker>
       )}
 
-      <Marker position={myPosition} icon={triangleIcon}></Marker>
+      <Marker position={myPosition} icon={myPositionIcon}></Marker>
     </MapContainer>
   );
 }

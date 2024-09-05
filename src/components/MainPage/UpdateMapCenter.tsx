@@ -1,21 +1,13 @@
-// function UpdateMapCenter() {
-//   return null;
-// }
+import useMainPageContext from "../../context/useMainPageContext";
+import useMapContext from "../../context/useMapContext";
 
-// import { useCallback } from "react";
+function UpdateMapCenter({ myPosition }: { myPosition: [number, number] }) {
+  const { map } = useMapContext();
+  const { routeLocked } = useMainPageContext();
 
-// type UpdateMapCenterTypes = {
-//   position: [number, number];
-// };
+  if (!map || !myPosition || !routeLocked) return;
+  map.panTo(myPosition, { animate: true, duration: 1 });
+  return null;
+}
 
-// const UpdateMapCenter = useCallback(
-//   ({ position }: UpdateMapCenterTypes) => {
-//     if (!map || !myPosition || !routeLocked) return;
-//     map.panTo(myPosition, map.getZoom(), { animate: true, duration: 1 });
-//     return null;
-//   },
-//   // [myPosition, routeLocked, map],
-//   [routeLocked, map, myPosition],
-// );
-
-// export default UpdateMapCenter;
+export default UpdateMapCenter;
