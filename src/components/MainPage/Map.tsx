@@ -98,56 +98,68 @@ function Map() {
     [routeLocked, map],
   );
 
+  const position = [51.505, -0.09];
   return (
-    <MapContainer
-      // rotate={true}
-      doubleClickZoom={false}
-      center={myPosition}
-      zoom={8}
-      scrollWheelZoom={true}
-      className="h-screen w-screen"
-      // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
-      whenReady={(startMap: { target: LeafletMap }) => {
-        saveMap(startMap.target);
-      }}
-    >
-      <button
-        className={`absolute left-0 top-1/2 z-[999999] h-32 w-32 transition-all duration-300 hover:scale-[1.1]`}
-        onMouseDown={() => {
-          if (sideBarOpened) {
-            closeSideBar();
-          } else {
-            openSideBar();
-          }
-        }}
-      >
-        {sideBarOpened ? (
-          <ChevronRightIcon className="text-slate-900" />
-        ) : (
-          <ChevronLeftIcon className="text-slate-900" />
-        )}
-      </button>
-      {/* <Fakecoords /> */}
+    // <MapContainer
+    //   // rotate={true}
+    //   doubleClickZoom={false}
+    //   center={myPosition}
+    //   zoom={8}
+    //   scrollWheelZoom={true}
+    //   className="h-screen w-screen"
+    //   // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
+    //   whenReady={(startMap: { target: LeafletMap }) => {
+    //     saveMap(startMap.target);
+    //   }}
+    // >
+    //   <button
+    //     className={`absolute left-0 top-1/2 z-[999999] h-32 w-32 transition-all duration-300 hover:scale-[1.1]`}
+    //     onMouseDown={() => {
+    //       if (sideBarOpened) {
+    //         closeSideBar();
+    //       } else {
+    //         openSideBar();
+    //       }
+    //     }}
+    //   >
+    //     {sideBarOpened ? (
+    //       <ChevronRightIcon className="text-slate-900" />
+    //     ) : (
+    //       <ChevronLeftIcon className="text-slate-900" />
+    //     )}
+    //   </button>
+    //   {/* <Fakecoords /> */}
 
-      <UpdateMapCenter position={myPosition} />
-      <MapEvents />
+    //   <UpdateMapCenter position={myPosition} />
+    //   <MapEvents />
+    //   <TileLayer
+    //     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //     url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+    //   />
+
+    //   {!lat || !lng || (
+    //     <Marker position={[+lat, +lng]}>
+    //       {/* <Popup>
+    //         <span className="text-2xl">Destination</span>
+    //       </Popup> */}
+    //       <Popup>
+    //         A pretty CSS3 popup. <br /> Easily customizable.
+    //       </Popup>
+    //     </Marker>
+    //   )}
+
+    //   {/* <Marker position={myPosition} icon={triangleIcon}></Marker> */}
+    // </MapContainer>
+    <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
-      {!lat || !lng || (
-        <Marker position={[+lat, +lng]}>
-          {/* <Popup>
-            <span className="text-2xl">Destination</span>
-          </Popup> */}
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      )}
-
-      {/* <Marker position={myPosition} icon={triangleIcon}></Marker> */}
+      <Marker position={position}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
     </MapContainer>
   );
 }
