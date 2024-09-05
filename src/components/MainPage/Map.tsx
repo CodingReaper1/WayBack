@@ -22,7 +22,7 @@ function Map() {
   const lng: string | null = searchParams?.get("lng");
 
   useGetRoute();
-  const { mapPinIcon, myPositionIcon } = useIcons();
+  const { mapPinIcon, myPositionIcon } = useIcons(myPosition);
 
   return (
     <MapContainer

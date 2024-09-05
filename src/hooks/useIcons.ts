@@ -3,7 +3,7 @@ import useGeoloacationData from "./useGeoloacationData";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-function useIcons() {
+function useIcons(myPosition: [number, number]) {
   const [heading, setHeading] = useState(0);
   const [starterDeg, setStarterDeg] = useState(0);
   useGeoloacationData(heading, setHeading);
@@ -43,7 +43,7 @@ function useIcons() {
     }, 1_000);
 
     return () => clearTimeout(timeout);
-  }, [heading]);
+  }, [heading, myPosition]);
 
   return { mapPinIcon, myPositionIcon };
 }
