@@ -43,7 +43,6 @@ function Map() {
   useGeoloacationData(heading, setHeading);
   useGetRoute();
 
-
   const triangleIcon = L.divIcon({
     className: "",
     html: `
@@ -107,7 +106,7 @@ function Map() {
       zoom={8}
       scrollWheelZoom={true}
       className="h-screen w-screen"
-      // @ts-expect-error |||| whenReady technically shouldnt recieve have any parameters () => void; but it has acces to map instance
+      // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
       whenReady={(startMap: { target: LeafletMap }) => {
         saveMap(startMap.target);
       }}
@@ -139,9 +138,9 @@ function Map() {
 
       {!lat || !lng || (
         <Marker position={[+lat, +lng]}>
-          <Popup>
+          {/* <Popup>
             <span className="text-2xl">Destination</span>
-          </Popup>
+          </Popup> */}
         </Marker>
       )}
 
