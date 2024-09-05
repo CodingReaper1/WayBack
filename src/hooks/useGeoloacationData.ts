@@ -2,16 +2,19 @@ import toast from "react-hot-toast";
 
 import { useEffect } from "react";
 import useMyPositionContext from "../context/useMyPositionContext";
+import useMainPageContext from "../context/useMainPageContext";
 
 function useGeoloacationData(
   heading: number,
   setHeading: React.Dispatch<React.SetStateAction<number>>,
 ) {
   const { changeMyPosition, myPosition } = useMyPositionContext();
+  const { disableMap, isMapEnabled } = useMainPageContext();
 
   useEffect(() => {
     const geoWatch = navigator.geolocation.watchPosition(
       (position) => {
+        if (!isMapEnabled) return;
         if (
           position.coords.latitude !== myPosition[0] ||
           position.coords.longitude !== myPosition[1]
@@ -28,7 +31,8 @@ function useGeoloacationData(
       },
       (error) => {
         console.error("Error getting current position:", error);
-        toast.error(`${error}`);
+        toast.error(`Location Error: ${error.message}`);
+        if (error.message === "User denied Geolocation") disableMap();
       },
       {
         enableHighAccuracy: true,
@@ -38,7 +42,14 @@ function useGeoloacationData(
     );
 
     return () => navigator.geolocation.clearWatch(geoWatch);
-  }, [setHeading, heading, myPosition, changeMyPosition]);
+  }, [
+    setHeading,
+    heading,
+    myPosition,
+    changeMyPosition,
+    disableMap,
+    isMapEnabled,
+  ]);
   return null;
 }
 

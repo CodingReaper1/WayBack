@@ -12,10 +12,12 @@ import UpdateMapCenter from "./UpdateMapCenter";
 import ChevronButton from "./ChevronButton";
 import MapEvents from "./MapEvents";
 import Fakecoords from "./Fakecoords";
+import useMainPageContext from "../../context/useMainPageContext";
 
 function Map() {
   const { saveMap } = useMapContext();
   const { myPosition } = useMyPositionContext();
+  const { isMapEnabled } = useMainPageContext();
 
   const [searchParams] = useSearchParams();
   const lat: string | null = searchParams?.get("lat");
@@ -26,19 +28,19 @@ function Map() {
 
   return (
     <MapContainer
-      // rotate={true}
+      key={isMapEnabled ? "enabled" : "disabled"}
       doubleClickZoom={false}
       center={myPosition}
       zoom={8}
       scrollWheelZoom={true}
-      className="h-screen w-screen"
+      className={`h-screen w-screen ${!isMapEnabled ? "cursor-not-allowed" : ""}`}
       // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
       whenReady={(startMap: { target: LeafletMap }) => {
         saveMap(startMap.target);
       }}
     >
       <ChevronButton />
-      <Fakecoords />
+      {/* <Fakecoords /> */}
 
       <UpdateMapCenter myPosition={myPosition} />
       <MapEvents />

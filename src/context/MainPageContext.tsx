@@ -1,10 +1,11 @@
-import { createContext, useReducer } from "react";
+import { createContext, useCallback, useReducer } from "react";
 
 type MainPageContextTypes = {
   sideBarFormOpen: boolean;
   routeLocked: boolean;
   lockedId: number;
   sideBarOpened: boolean;
+  isMapEnabled: boolean;
 
   openSideBar: () => void;
   closeSideBar: () => void;
@@ -12,6 +13,7 @@ type MainPageContextTypes = {
   unlockRoute: () => void;
   openSideBarForm: () => void;
   closeSideBarForm: () => void;
+  disableMap: () => void;
 };
 
 type InitalStateTypes = {
@@ -19,6 +21,7 @@ type InitalStateTypes = {
   routeLocked: boolean;
   lockedId: number;
   sideBarOpened: boolean;
+  isMapEnabled: boolean;
 };
 
 type WithoutPayloadAction = {
@@ -27,7 +30,8 @@ type WithoutPayloadAction = {
     | "MainPage/closeSideBar"
     | "MainPage/openSideBarForm"
     | "MainPage/closeSideBarForm"
-    | "MainPage/unlockRoute";
+    | "MainPage/unlockRoute"
+    | "MainPage/disableMap";
 };
 
 type WithNumberPayloadAction = {
@@ -44,6 +48,7 @@ const initalState: InitalStateTypes = {
   routeLocked: false,
   lockedId: -1,
   sideBarOpened: true,
+  isMapEnabled: true,
 };
 
 function reducer(
@@ -69,14 +74,19 @@ function reducer(
     case "MainPage/closeSideBarForm":
       return { ...state, sideBarFormOpen: false };
 
+    case "MainPage/disableMap":
+      return { ...state, isMapEnabled: false };
+
     default:
       throw new Error("Unknow action");
   }
 }
 
 function MainPageProvider({ children }: { children: React.ReactNode }) {
-  const [{ sideBarFormOpen, routeLocked, lockedId, sideBarOpened }, dispatch] =
-    useReducer(reducer, initalState);
+  const [
+    { sideBarFormOpen, routeLocked, lockedId, sideBarOpened, isMapEnabled },
+    dispatch,
+  ] = useReducer(reducer, initalState);
 
   function openSideBar() {
     dispatch({ type: "MainPage/openSideBar" });
@@ -102,6 +112,13 @@ function MainPageProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "MainPage/openSideBarForm" });
   }
 
+  const disableMap = useCallback(() => {
+    dispatch({ type: "MainPage/disableMap" });
+  }, []);
+  // function disableMap() {
+  //   dispatch({ type: "MainPage/disableMap" });
+  // }
+
   return (
     <MainPageContext.Provider
       value={{
@@ -109,6 +126,7 @@ function MainPageProvider({ children }: { children: React.ReactNode }) {
         routeLocked,
         lockedId,
         sideBarOpened,
+        isMapEnabled,
 
         openSideBar,
         closeSideBar,
@@ -116,6 +134,7 @@ function MainPageProvider({ children }: { children: React.ReactNode }) {
         unlockRoute,
         closeSideBarForm,
         openSideBarForm,
+        disableMap,
       }}
     >
       {children}

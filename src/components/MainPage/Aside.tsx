@@ -98,7 +98,7 @@ function Aside() {
           className={`${
             sideBarFormOpen
               ? `flex max-h-[50rem] flex-col gap-6 opacity-100`
-              : `max-h-0 opacity-0`
+              : `pointer-events-none max-h-0 opacity-0`
           }`}
           page="Mainpage"
         >
