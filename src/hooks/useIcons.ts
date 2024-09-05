@@ -1,6 +1,7 @@
 import L from "leaflet";
 import useGeoloacationData from "./useGeoloacationData";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 function useIcons() {
   const [heading, setHeading] = useState(0);
@@ -12,7 +13,7 @@ function useIcons() {
   const mapPinIcon = L.divIcon({
     className: "",
     html: `
-      <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
+    <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
     `,
   });
 
@@ -20,22 +21,23 @@ function useIcons() {
     className: "",
     html: `
       <div class="flex items-center justify-center h-[12px] -rotate-90">
-        <img src="/right-arrow.png" class="w-12 h-12" style="animation: spin 1s forwards;" />
+      <img src="/right-arrow.png" class="w-12 h-12" style="animation: spin 1s forwards;" />
       </div>
       <style>
-        @keyframes spin {
-          from {
+      @keyframes spin {
+        from {
             transform: rotate(${starterDeg}deg);
           }
           to {
             transform: rotate(${heading ? heading : 0}deg);
-          }
-        }
-      </style>
+            }
+            }
+            </style>
     `,
   });
 
   useEffect(() => {
+    toast.success(`heading ${heading}`);
     const timeout = setTimeout(() => {
       setStarterDeg(heading ? heading : 0);
     }, 1_000);
