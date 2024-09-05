@@ -11,7 +11,7 @@ import useIcons from "../../hooks/useIcons";
 import UpdateMapCenter from "./UpdateMapCenter";
 import ChevronButton from "./ChevronButton";
 import MapEvents from "./MapEvents";
-// import Fakecoords from "./Fakecoords";
+import Fakecoords from "./Fakecoords";
 
 function Map() {
   const { saveMap } = useMapContext();
@@ -38,7 +38,7 @@ function Map() {
       }}
     >
       <ChevronButton />
-      {/* <Fakecoords /> */}
+      <Fakecoords />
 
       <UpdateMapCenter myPosition={myPosition} />
       <MapEvents />
@@ -47,13 +47,13 @@ function Map() {
         url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       />
 
-      {/* {!lat || !lng || ( */}
-      <Marker position={[+lat!, +lng!]} icon={mapPinIcon}>
-        <Popup>
-          <span className="text-2xl">Destination</span>
-        </Popup>
-      </Marker>
-      {/* )} */}
+      {!lat || !lng || (
+        <Marker position={[+lat, +lng]} icon={mapPinIcon}>
+          <Popup>
+            <span className="text-2xl">Destination</span>
+          </Popup>
+        </Marker>
+      )}
 
       <Marker position={myPosition} icon={myPositionIcon}></Marker>
     </MapContainer>

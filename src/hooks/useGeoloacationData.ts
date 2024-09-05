@@ -20,7 +20,9 @@ function useGeoloacationData(
             position.coords.latitude,
             position.coords.longitude,
           ]);
-        // console.log(position);
+
+        console.log(position);
+
         if (position.coords.heading && position.coords.heading !== heading)
           setHeading(position.coords.heading);
       },
@@ -36,7 +38,7 @@ function useGeoloacationData(
     );
 
     return () => navigator.geolocation.clearWatch(geoWatch);
-  }, [setHeading, myPosition, heading, changeMyPosition]);
+  }, [setHeading, heading, myPosition, changeMyPosition]);
   return null;
 }
 
