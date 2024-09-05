@@ -6,6 +6,9 @@ import { memo, useState } from "react";
 import Button from "../Button";
 import useMainPageContext from "../../context/useMainPageContext";
 import Menus from "../Menus";
+import useDeleteSelectedPlace from "../../hooks/useDeleteSelectedPlace";
+import { UseFormSetValue } from "react-hook-form";
+import { PlaceTypes } from "./Aside";
 
 type SideBarRowTypes = {
   placeInfo: {
@@ -16,16 +19,30 @@ type SideBarRowTypes = {
     coords: string;
   };
   id: number;
+  reactHookFormSetValue: UseFormSetValue<PlaceTypes>;
+  setEditingSelectedPlaceID: React.Dispatch<
+    React.SetStateAction<number | undefined>
+  >;
 };
 
-function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
-  // console.log(placeInfo);
-  // console.log(id);
-  const { lockedId, routeLocked, closeSideBar, lockRoute, unlockRoute } =
-    useMainPageContext();
+function SideBarRow({
+  placeInfo,
+  id,
+  reactHookFormSetValue,
+  setEditingSelectedPlaceID,
+}: SideBarRowTypes) {
+  const {
+    lockedId,
+    routeLocked,
+    closeSideBar,
+    lockRoute,
+    unlockRoute,
+    openSideBarForm,
+  } = useMainPageContext();
 
   const [openedDescription, setOpenedDescription] = useState(false);
   const navigate = useNavigate();
+  const { deleteSelectedPlace } = useDeleteSelectedPlace();
 
   function handleFind() {
     if (routeLocked && id === lockedId) return unlockRoute();
@@ -37,8 +54,12 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
     lockRoute(id);
   }
 
-  function handleDeletePlace() {}
-  function handleEditPlace() {}
+  function handleEditPlace() {
+    openSideBarForm();
+    reactHookFormSetValue("description", placeInfo.description);
+    reactHookFormSetValue("destination", placeInfo.destination);
+    setEditingSelectedPlaceID(placeInfo.id);
+  }
 
   return (
     <div className={`flex  flex-col   rounded-md bg-slate-700 p-5  `}>
@@ -58,17 +79,25 @@ function SideBarRow({ placeInfo, id }: SideBarRowTypes) {
             {lockedId === id && routeLocked ? "Unlock" : "Find"}
           </Button>
 
-          <Menus.Toggle id={String(id)}>
-            <HiEllipsisVertical className="size-9" />
-          </Menus.Toggle>
-          <Menus.List id={String(id)}>
-            <Menus.Button icon={<HiPencilSquare className="text-slate-400" />}>
-              Edit
-            </Menus.Button>
-            <Menus.Button icon={<HiTrash className="text-slate-400" />}>
-              Delete
-            </Menus.Button>
-          </Menus.List>
+          <Menus.Menu>
+            <Menus.Toggle id={String(id)}>
+              <HiEllipsisVertical className="size-9" />
+            </Menus.Toggle>
+            <Menus.List id={String(id)}>
+              <Menus.Button
+                icon={<HiPencilSquare className="text-slate-400" />}
+                onClick={handleEditPlace}
+              >
+                Edit
+              </Menus.Button>
+              <Menus.Button
+                icon={<HiTrash className="text-slate-400" />}
+                onClick={() => deleteSelectedPlace(placeInfo.id)}
+              >
+                Delete
+              </Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
         </div>
       </div>
 

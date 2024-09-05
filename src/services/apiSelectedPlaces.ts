@@ -1,12 +1,5 @@
 import supabase from "./supabase";
 
-export async function deleteSelectedPlaceApi() {
-  // const { error } = await supabase
-  //   .from("selectedPlaces")
-  //   .delete()
-  //   .eq("some_column", "someValue");
-}
-
 type PlaceTypes = {
   userID: string;
   destination: string;
@@ -22,10 +15,26 @@ type ParsedTypes = {
   coords: [number, number];
 };
 
+type EditSelectedPlacesTypes = {
+  editingSelectedPlaceID: number;
+  destination: string;
+  description: string;
+};
+
+export async function deleteSelectedPlaceApi(id: number) {
+  const { error } = await supabase.from("selectedPlaces").delete().eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  return null;
+}
+
 export async function readSelectedPlacesApi(id: string | undefined) {
   const { data: allSelectedPlaces, error } = await supabase
     .from("selectedPlaces")
     .select("*");
+
+  if (error) throw new Error(error.message);
 
   const accountSelectedPlaces = allSelectedPlaces?.filter(
     (place: PlaceTypes) => place.userID === id,
@@ -55,6 +64,24 @@ export async function createSelectedPlaceApi({
     .from("selectedPlaces")
     .insert({ userID, coords, description, destination })
     .select();
-  // console.log(error);
-  return null;
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function editSelectedPlaceApi({
+  editingSelectedPlaceID,
+  destination,
+  description,
+}: EditSelectedPlacesTypes) {
+  const { data, error } = await supabase
+    .from("selectedPlaces")
+    .update({ destination: destination, description: description })
+    .eq("id", editingSelectedPlaceID)
+    .select();
+
+  if (error) throw new Error(error.message);
+
+  return data;
 }

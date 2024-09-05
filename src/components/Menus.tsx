@@ -54,9 +54,7 @@ function useMenusContext() {
 }
 
 function Menu({ children }: { children: React.ReactNode }) {
-  return (
-    <div className=" flex items-center justify-end gap-20">{children}</div>
-  );
+  return <div>{children}</div>;
 }
 
 function Toggle({ id, children }: { id: string; children: React.ReactNode }) {
@@ -101,7 +99,7 @@ function List({ id, children }: { id: string; children: React.ReactNode }) {
   return createPortal(
     <ul
       ref={ref}
-      className={`absolute flex  flex-col gap-1 rounded-md bg-slate-800  text-2xl text-white shadow-md shadow-slate-600`}
+      className={`absolute flex  flex-col gap-1 rounded-md bg-slate-600  text-2xl text-white shadow-md shadow-slate-600`}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
     >
       {children}
@@ -121,7 +119,7 @@ function Button({ children, icon, onClick }: ButtonTypes) {
     <li>
       <button
         onClick={handleClick}
-        className="flex w-full items-center gap-2 px-6 py-3 hover:bg-slate-900"
+        className="flex w-full items-center gap-2 rounded-md px-6 py-3 hover:bg-slate-900"
       >
         {icon}
         <span>{children}</span>

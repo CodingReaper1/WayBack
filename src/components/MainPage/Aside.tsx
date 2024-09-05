@@ -14,8 +14,10 @@ import useReadSelectedPlaces from "../../hooks/useReadSelectedPlaces.js";
 import StartSelecting from "./StartSelecting.js";
 import useLogout from "../../hooks/useLogout.js";
 import Menus from "../Menus.js";
+import { useState } from "react";
+import useEditSelectedPlace from "../../hooks/useEditSelectedPlace.js";
 
-type PlaceTypes = {
+export type PlaceTypes = {
   id: number;
   destination: string;
   description: string;
@@ -24,29 +26,40 @@ type PlaceTypes = {
 };
 
 function Aside() {
-  const { sideBarFormOpen, sideBarOpened, closeSideBar, closeSideBarForm } =
-    useMainPageContext();
-  const { logout, isPending } = useLogout();
-
   const {
     register,
     handleSubmit,
     // getValues,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<PlaceTypes>();
-  const { id }: { id?: string } = useParams();
 
+  const { id }: { id?: string } = useParams();
   const [searchParams] = useSearchParams();
   const lat: string | null = searchParams?.get("lat");
   const lng: string | null = searchParams?.get("lng");
 
-  const { selectedPlaces, loadingPlaces } = useReadSelectedPlaces(id);
+  const { sideBarFormOpen, sideBarOpened, closeSideBar, closeSideBarForm } =
+    useMainPageContext();
+  const { logout, isPending } = useLogout();
 
+  const { selectedPlaces, loadingPlaces } = useReadSelectedPlaces(id);
   const { createSelectedPlace } = useCreateSelectedPlace(reset);
 
+  const { editSelectedPlace } = useEditSelectedPlace(reset);
+  const [editingSelectedPlaceID, setEditingSelectedPlaceID] = useState<
+    number | undefined
+  >(undefined);
+
   async function onSubmit(formData: PlaceTypes) {
-    createSelectedPlace({ ...formData, lat, lng, id });
+    if (!editingSelectedPlaceID)
+      createSelectedPlace({ ...formData, lat, lng, id });
+
+    if (editingSelectedPlaceID) {
+      editSelectedPlace({ ...formData, editingSelectedPlaceID });
+    }
+    setEditingSelectedPlaceID(undefined);
   }
 
   return (
@@ -128,7 +141,13 @@ function Aside() {
               .slice()
               .reverse()
               .map((place: PlaceTypes, index: number) => (
-                <SideBarRow placeInfo={place} key={index} id={index} />
+                <SideBarRow
+                  placeInfo={place}
+                  key={index}
+                  id={index}
+                  reactHookFormSetValue={setValue}
+                  setEditingSelectedPlaceID={setEditingSelectedPlaceID}
+                />
               ))
           ) : (
             <StartSelecting />
