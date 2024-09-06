@@ -1,5 +1,5 @@
-import Aside from "../components/MainPage/Aside";
-import Map from "../components/MainPage/Map";
+import Aside from "../features/sidebar/Aside";
+import Map from "../features/map/Map";
 
 function MainPage() {
   return (

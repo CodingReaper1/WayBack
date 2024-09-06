@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useLoginContext from "../context/useLoginContext";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "../features/auth/useUser";
 import { useEffect } from "react";
 
 function Confirm() {

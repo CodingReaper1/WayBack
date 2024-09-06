@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import Form from "../components/Form";
-import LoginFormRow from "../components/Login/LoginFormRow";
-import LoginInput from "../components/Login/LoginInput";
-import HOne from "../components/HOne";
-import LoginButton from "../components/Login/LoginButton";
+import Form from "../ui/Form";
+import LoginFormRow from "../features/auth/LoginFormRow";
+import LoginInput from "../features/auth/LoginInput";
+import HOne from "../ui/HOne";
+import LoginButton from "../features/auth/LoginButton";
 import useLoginContext from "../context/useLoginContext";
-import AppNav from "../components/HomePage/AppNav";
-import useSendResetPasswordEmail from "../hooks/useSendResetPasswordEmail";
+import AppNav from "../features/HomePage/AppNav";
+import useSendResetPasswordEmail from "../features/auth/useSendResetPasswordEmail";
 import { useState } from "react";
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../ui/Paragraph";
 
 type OnSubmitTypes = {
   recoveryEmail: string;

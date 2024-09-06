@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import Form from "../components/Form";
-import LoginFormRow from "../components/Login/LoginFormRow";
-import LoginInput from "../components/Login/LoginInput";
-import HOne from "../components/HOne";
-import LoginButton from "../components/Login/LoginButton";
+import Form from "../ui/Form";
+import LoginFormRow from "../features/auth/LoginFormRow";
+import LoginInput from "../features/auth/LoginInput";
+import HOne from "../ui/HOne";
+import LoginButton from "../features/auth/LoginButton";
 import useLoginContext from "../context/useLoginContext";
-import AppNav from "../components/HomePage/AppNav";
-import useResetPassword from "../hooks/useResetPassword";
+import AppNav from "../features/HomePage/AppNav";
+import useResetPassword from "../features/auth/useResetPassword";
 import { useEffect } from "react";
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../ui/Paragraph";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 type OnSubmitTypes = {
@@ -36,7 +36,7 @@ function PasswordRecovery() {
     if (!retrievedEmail) navigate("/");
   }, [navigate, retrievedEmail]);
 
-  async function onSubmit({ password, rePassword }: OnSubmitTypes) {
+  async function onSubmit({ password }: OnSubmitTypes) {
     disableButton();
     if (retrievedEmail === null || !retrievedEmail) return navigate("/");
     resetPassword({ password, retrievedEmail });

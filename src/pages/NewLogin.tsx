@@ -1,6 +1,6 @@
-import SignUp from "../components/Login/SignUp";
-import SignIn from "../components/Login/SignIn";
-import Toggle from "../components/Login/Toggle";
+import SignUp from "../features/auth/SignUp";
+import SignIn from "../features/auth/SignIn";
+import Toggle from "../features/auth/Toggle";
 
 function NewLogin() {
   return (

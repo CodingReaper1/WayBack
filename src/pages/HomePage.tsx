@@ -1,5 +1,5 @@
-import SectionOne from "../components/HomePage/SectionOne";
-import SectionTwo from "../components/HomePage/SectionTwo";
+import SectionOne from "../features/HomePage/SectionOne";
+import SectionTwo from "../features/HomePage/SectionTwo";
 
 function HomePage() {
   return (
