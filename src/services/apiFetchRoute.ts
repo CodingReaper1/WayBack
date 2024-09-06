@@ -2,7 +2,6 @@ type UpdateRouteTypes = {
   myPosition: [number, number];
   lat: string | null;
   lng: string | null;
-  mapIsReady?: boolean;
 };
 
 async function updateRouteApi({

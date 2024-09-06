@@ -68,7 +68,6 @@ function useGetRoute() {
   const [searchParams] = useSearchParams();
   const lat: string | null = searchParams?.get("lat");
   const lng: string | null = searchParams?.get("lng");
-  // const queryClient = useQueryClient();
   const { updateRouteUsage } = useUpdateRouteUsage();
 
   const { map } = useMapContext();
@@ -93,9 +92,6 @@ function useGetRoute() {
         map.routePolyline = routePolyline;
         updateRouteUsage();
 
-        // queryClient.invalidateQueries({
-        //   queryKey: ["u"],
-        // });
         return data.paths[0];
       } catch (err) {
         const error = err as Error;

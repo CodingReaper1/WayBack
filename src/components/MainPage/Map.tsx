@@ -1,7 +1,7 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useSearchParams } from "react-router-dom";
-import { Map as LeafletMap } from "leaflet";
+import { LatLngBounds, Map as LeafletMap } from "leaflet";
 // import "leaflet-routing-machine";
 
 import useMapContext from "../../context/useMapContext";
@@ -13,6 +13,7 @@ import ChevronButton from "./ChevronButton";
 import MapEvents from "./MapEvents";
 // import Fakecoords from "./Fakecoords";
 import useMainPageContext from "../../context/useMainPageContext";
+import useFindUserLocation from "../../hooks/useFindUserLocation";
 
 function Map() {
   const { saveMap } = useMapContext();
@@ -24,6 +25,7 @@ function Map() {
   const lng: string | null = searchParams?.get("lng");
 
   useGetRoute();
+  useFindUserLocation();
   const { mapPinIcon, myPositionIcon } = useIcons(myPosition);
 
   return (
@@ -33,12 +35,16 @@ function Map() {
       center={myPosition}
       zoom={8}
       maxZoom={19}
+      minZoom={3}
       scrollWheelZoom={true}
       className={`h-screen w-screen ${!isMapEnabled ? "cursor-not-allowed" : ""}`}
       // @ts-expect-error |||| typescript says whenReady doesnt have acces to any parameters () => void; but it has acces to map instance
       whenReady={(startMap: { target: LeafletMap }) => {
         saveMap(startMap.target);
       }}
+      maxBounds={new LatLngBounds([-90, -180], [90, 180])}
+      maxBoundsViscosity={1.0}
+      worldCopyJump={false}
     >
       <ChevronButton />
       {/* <Fakecoords /> */}
@@ -50,6 +56,7 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         maxZoom={19} // Ensure max zoom is set properly
+        minZoom={3}
       />
       {/* <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.fr/">OSM France</a>'

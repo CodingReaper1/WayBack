@@ -46,7 +46,7 @@ function Chart() {
     .reverse();
 
   return (
-    <div className=" col-span-full w-full bg-white  dark:bg-slate-950">
+    <div className=" col-span-full w-full bg-white  pb-5 pt-2 dark:bg-slate-950">
       <ResponsiveContainer height={400} width="100%" className=" pb-2 pt-14">
         <AreaChart data={data}>
           <XAxis
