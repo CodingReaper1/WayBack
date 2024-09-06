@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { findUserLocationApi } from "../../services/apiUserLocation";
-import useMyPositionContext from "../../context/useMyPositionContext";
+// import useMyPositionContext from "../../context/useMyPositionContext";
 
 function useFindUserLocation() {
-  const { changeMyPosition, myPosition } = useMyPositionContext();
+  // const { changeMyPosition, myPosition } = useMyPositionContext();
 
   // const { data } = useQuery({
   //   queryKey: ["findUserLocation"],
@@ -15,7 +15,7 @@ function useFindUserLocation() {
   //   // refetchIntervalInBackground: true,
   //   // refetchInterval: 1000,
   // });
-  const { data } = useQuery({
+  useQuery({
     queryKey: ["findUserLocation"],
     queryFn: findUserLocationApi,
   });

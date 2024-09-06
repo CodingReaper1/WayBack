@@ -15,14 +15,14 @@ function useGeoloacationData(
     const geoWatch = navigator.geolocation.watchPosition(
       (position) => {
         if (!isMapEnabled) return;
-        // if (
-        //   position.coords.latitude !== myPosition[0] ||
-        //   position.coords.longitude !== myPosition[1]
-        // )
-        //   changeMyPosition([
-        //     position.coords.latitude,
-        //     position.coords.longitude,
-        //   ]);
+        if (
+          position.coords.latitude !== myPosition[0] ||
+          position.coords.longitude !== myPosition[1]
+        )
+          changeMyPosition([
+            position.coords.latitude,
+            position.coords.longitude,
+          ]);
 
         if (position.coords.heading && position.coords.heading !== heading)
           setHeading(position.coords.heading);

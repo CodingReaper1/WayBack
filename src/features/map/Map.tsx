@@ -11,8 +11,8 @@ import useIcons from "./useIcons";
 import UpdateMapCenter from "./UpdateMapCenter";
 import ChevronButton from "./ChevronButton";
 import MapEvents from "./MapEvents";
-import Fakecoords from "./Fakecoords";
 import useMainPageContext from "../../context/useMainPageContext";
+// import Fakecoords from "./Fakecoords";
 // import useFindUserLocation from "./useFindUserLocation";
 
 function Map() {
@@ -47,7 +47,7 @@ function Map() {
       worldCopyJump={false}
     >
       <ChevronButton />
-      <Fakecoords />
+      {/* <Fakecoords /> */}
 
       <UpdateMapCenter myPosition={myPosition} />
       <MapEvents />
