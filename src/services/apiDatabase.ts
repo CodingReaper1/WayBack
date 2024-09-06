@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 
-// const MAINURL = "https://waybackk.netlify.app";
-const MAINURL = "http://localhost:5173";
+const MAINURL = "https://waybackk.netlify.app";
+// const MAINURL = "http://localhost:5173";
 
 type LogInTypes = {
   email: string;
