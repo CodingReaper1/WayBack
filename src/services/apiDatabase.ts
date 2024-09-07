@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
 import supabase from "./supabase";
 
-// const MAINURL = "https://waybackk.netlify.app";
-const MAINURL = "http://localhost:5173";
+const MAINURL = "https://waybackk.netlify.app";
+// const MAINURL = "http://localhost:5173";
 
 type LogInTypes = {
   email: string;
@@ -50,7 +50,7 @@ export async function getCurrentUserApi() {
     const error = err as Error;
     toast.error(`Error: ${error.message}`);
     console.error(`Error: ${error.message}`);
-    return null
+    return null;
   }
 }
 
