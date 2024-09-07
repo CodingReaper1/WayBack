@@ -8,7 +8,6 @@ import PageNotFound from "./pages/PageNotFound";
 import MainPage from "./pages/MainPage";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import NewLogin from "./pages/NewLogin";
-import DarkModeToggle from "./ui/DarkModeToggle";
 import Confirm from "./features/auth/Confirm";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import ResetPassword from "./pages/ResetPassword";
@@ -26,7 +25,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <DarkModeToggle display={false} />
 
       <BrowserRouter>
         <Routes>

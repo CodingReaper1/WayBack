@@ -17,11 +17,9 @@ function DarkModeProvider({ children }: { children: React.ReactNode }) {
   useEffect(
     function () {
       if (isDarkMode) {
-        document.documentElement.classList.add("dark-mode");
-        document.documentElement.classList.remove("light-mode");
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove("dark-mode");
-        document.documentElement.classList.add("light-mode");
+        document.documentElement.classList.remove("dark");
       }
     },
     [isDarkMode],
