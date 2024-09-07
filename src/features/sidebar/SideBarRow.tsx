@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { memo, useState } from "react";
-import Button from "../../ui/Button";
 import useMainPageContext from "../../context/useMainPageContext";
 import Menus from "../../ui/Menus";
 import useDeleteSelectedPlace from "../selectedPlaces/useDeleteSelectedPlace";
 import { UseFormSetValue } from "react-hook-form";
-import { PlaceTypes } from "../../features/sidebar/Aside";
+import { PlaceTypes } from "./SideBar";
+import ButtonText from "../../ui/ButtonText";
+import FlexBox from "../../ui/FlexBox";
+import HTwo from "../../ui/HTwo";
 
 type SideBarRowTypes = {
   placeInfo: {
@@ -62,25 +64,25 @@ function SideBarRow({
   }
 
   return (
-    <div className={`flex  flex-col   rounded-md bg-slate-700 p-5  `}>
-      <div className="relative flex justify-between">
-        <h2
-          className=" cursor-pointer content-center  overflow-hidden text-3xl "
+    <FlexBox className="flex-col rounded-md bg-slate-700 p-5">
+      <FlexBox className="relative justify-between">
+        <HTwo
+          page="Mainpage"
           onClick={() => setOpenedDescription(!openedDescription)}
         >
           {placeInfo.destination}
-        </h2>
-        <div className="flex gap-3">
-          <Button
-            type="mainpage/find"
+        </HTwo>
+        <FlexBox className="gap-3">
+          <ButtonText
+            type="normal"
             className={lockedId === id && routeLocked ? "text-red-600" : ""}
             onClick={handleFind}
           >
             {lockedId === id && routeLocked ? "Unlock" : "LockIn"}
-          </Button>
+          </ButtonText>
 
           <Menus.Menu>
-            <Menus.Toggle id={String(id)}>
+            <Menus.Toggle id={String(id)} rectX={-35} rectY={8}>
               <HiEllipsisVertical className="size-9" />
             </Menus.Toggle>
             <Menus.List id={String(id)}>
@@ -98,8 +100,8 @@ function SideBarRow({
               </Menus.Button>
             </Menus.List>
           </Menus.Menu>
-        </div>
-      </div>
+        </FlexBox>
+      </FlexBox>
 
       <motion.p
         className={`  overflow-hidden  break-words `}
@@ -116,7 +118,7 @@ function SideBarRow({
           ? placeInfo.description
           : "Description was not written."}
       </motion.p>
-    </div>
+    </FlexBox>
   );
 }
 

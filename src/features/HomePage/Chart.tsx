@@ -1,5 +1,4 @@
 import { useSearchParams } from "react-router-dom";
-import useReadRouteUsage from "../routeUsage/useReadRouteUsage";
 import { eachDayOfInterval, format, subDays } from "date-fns";
 import {
   Area,
@@ -10,6 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
+import useReadRouteUsage from "../routeUsage/useReadRouteUsage";
 import Spinner from "../../ui/Spinner";
 import useDarkModeContext from "../../context/useDarkModeContext";
 

@@ -13,7 +13,8 @@ function useSendResetPasswordEmail() {
       enableButton();
     },
     onError: (err) => {
-      toast.error(`Error: ${err.message}`);
+      toast.error(`Error: ${err}`);
+      console.error(`Error: ${err}`);
       enableButton();
     },
   });

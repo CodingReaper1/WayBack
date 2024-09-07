@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteSelectedPlaceApi } from "../../services/apiSelectedPlaces";
 import toast from "react-hot-toast";
+
+import { deleteSelectedPlaceApi } from "../../services/apiSelectedPlaces";
 
 function useDeleteSelectedPlace() {
   const queryClient = useQueryClient();
@@ -14,6 +15,7 @@ function useDeleteSelectedPlace() {
     },
     onError: (err) => {
       toast.error(`Error: ${err}`);
+      console.error(`Error: ${err}`);
     },
   });
 

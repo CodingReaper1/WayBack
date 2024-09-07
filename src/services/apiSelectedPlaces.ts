@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import supabase from "./supabase";
 
 type PlaceTypes = {
@@ -30,25 +31,32 @@ export async function deleteSelectedPlaceApi(id: number) {
 }
 
 export async function readSelectedPlacesApi(id: string | undefined) {
-  const { data: allSelectedPlaces, error } = await supabase
-    .from("selectedPlaces")
-    .select("*");
+  try {
+    const { data: allSelectedPlaces, error } = await supabase
+      .from("selectedPlaces")
+      .select("*");
 
-  if (error) throw new Error(error.message);
+    if (error) throw new Error(error.message);
 
-  const accountSelectedPlaces = allSelectedPlaces?.filter(
-    (place: PlaceTypes) => place.userID === id,
-  );
+    const accountSelectedPlaces = allSelectedPlaces?.filter(
+      (place: PlaceTypes) => place.userID === id,
+    );
 
-  const selectedPlacesParsed = accountSelectedPlaces?.reduce(
-    (acc: ParsedTypes[], place: PlaceTypes) => {
-      acc.push({ ...place, coords: JSON.parse(place.coords) });
-      return acc;
-    },
-    [],
-  );
+    const selectedPlacesParsed = accountSelectedPlaces?.reduce(
+      (acc: ParsedTypes[], place: PlaceTypes) => {
+        acc.push({ ...place, coords: JSON.parse(place.coords) });
+        return acc;
+      },
+      [],
+    );
 
-  return selectedPlacesParsed;
+    return selectedPlacesParsed;
+  } catch (err) {
+    const error = err as Error;
+    toast.error(`Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
+    return [];
+  }
 }
 
 export async function createSelectedPlaceApi({

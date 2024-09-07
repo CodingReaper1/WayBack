@@ -10,28 +10,25 @@ import Form from "../../ui/Form";
 import LoginButton from "../../features/auth/LoginButton";
 import useLogIn from "./useLogIn";
 import Paragraph from "../../ui/Paragraph";
-import useSignInWithGithub from "./useSignInWithGithub";
+import ButtonText from "../../ui/ButtonText";
+import Or from "../../ui/Or";
+import ButtonGithub from "../../ui/ButtonGithub";
 
 type OnSubmitTypes = {
   signInEmail: string;
   signInPassword: string;
-  // register: UseFormRegister<FieldValues>;
 };
 
 function SignIn() {
   const {
     register,
     handleSubmit,
-    // reset,
-    // setError,
-    // getValues,
     formState: { errors },
   } = useForm<OnSubmitTypes>();
 
   const { signUpActive, signUp, isButtonReady, disableButton, enableButton } =
     useLoginContext();
   const { logIn } = useLogIn();
-  const { signInWithGithub } = useSignInWithGithub();
 
   async function onSubmit(formData: OnSubmitTypes) {
     disableButton();
@@ -59,20 +56,9 @@ function SignIn() {
       <Form onSubmit={handleSubmit(onSubmit)} page="Login">
         <HOne page="Login">Sign In</HOne>
 
-        <button
-          className="mx-1 mb-4 flex  items-center justify-center gap-5 rounded-xl border-2 border-solid border-slate-300 py-4 text-3xl font-medium transition-all duration-300 hover:scale-[1.01] hover:bg-slate-50 hover:shadow-md dark:hover:bg-slate-900 xxs:w-[30rem] xs:w-[35rem] sm:w-[31rem] lg:w-[40rem] xl:w-[50rem]"
-          onClick={() => signInWithGithub()}
-          type="button"
-        >
-          <i className="fa-brands fa-github  text-5xl text-black"></i>
-          Continue using github
-        </button>
+        <ButtonGithub />
 
-        <div className="flex w-full items-center">
-          <div className="flex-grow border-t border-stone-700 dark:border-stone-400"></div>
-          <span className="mx-4">or</span>
-          <div className="flex-grow border-t border-stone-700 dark:border-stone-400"></div>
-        </div>
+        <Or />
         <LoginFormRow error={errors?.signInEmail?.message}>
           <LoginInput
             error={errors?.signInEmail?.message}
@@ -93,8 +79,7 @@ function SignIn() {
           />
         </LoginFormRow>
 
-        <motion.a
-          href="#"
+        <motion.p
           className="self-start text-2xl  hover:underline"
           variants={{
             hidden: { opacity: 0 },
@@ -102,18 +87,14 @@ function SignIn() {
           }}
         >
           <Link to="/password-recovery">Forget Your Password?</Link>
-        </motion.a>
+        </motion.p>
 
         <LoginButton disabled={isButtonReady}>Sign In</LoginButton>
         <Paragraph page="Login" className="mt-10 self-start sm:hidden">
           Dont have an account?
-          <a
-            href="#"
-            onClick={signUp}
-            className="ml-5 font-semibold text-blue-600"
-          >
+          <ButtonText type="fakeLink" onClick={signUp}>
             Sign Up
-          </a>
+          </ButtonText>
         </Paragraph>
       </Form>
     </motion.div>

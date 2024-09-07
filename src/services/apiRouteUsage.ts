@@ -1,14 +1,22 @@
+import toast from "react-hot-toast";
 import supabase from "./supabase";
 
 export async function readRouteUsageApi(startDate: string) {
-  const { data: routeUsage, error } = await supabase
-    .from("routeUsage")
-    .select("created_at,usageDaily")
-    .gte("created_at", startDate);
+  try {
+    const { data: routeUsage, error } = await supabase
+      .from("routeUsage")
+      .select("created_at,usageDaily")
+      .gte("created_at", startDate);
 
-  if (error) throw new Error(`Error: ${error.message}`);
+    if (error) throw new Error(error.message);
 
-  return routeUsage;
+    return routeUsage;
+  } catch (err) {
+    const error = err as Error;
+    toast.error(`Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
+    return [];
+  }
 }
 
 export async function updateRouteUsageApi() {
@@ -22,7 +30,7 @@ export async function updateRouteUsageApi() {
     .gte("created_at", startOfDay)
     .lte("created_at", endOfDay);
 
-  if (error) throw new Error(`Error: ${error.message}`);
+  if (error) throw new Error(error.message);
 
   if (routeUsage?.length === 0) {
     const { error: errorInserting } = await supabase
@@ -30,7 +38,7 @@ export async function updateRouteUsageApi() {
       .insert([{ usageDaily: 1 }])
       .select();
 
-    if (errorInserting) throw new Error(`Error: ${errorInserting.message}`);
+    if (errorInserting) throw new Error(errorInserting.message);
   } else {
     const { error: errorUpdating } = await supabase
       .from("routeUsage")
@@ -38,7 +46,7 @@ export async function updateRouteUsageApi() {
       .eq("id", routeUsage[0].id)
       .select();
 
-    if (errorUpdating) throw new Error(`Error: ${errorUpdating.message}`);
+    if (errorUpdating) throw new Error(errorUpdating.message);
   }
 
   return routeUsage;

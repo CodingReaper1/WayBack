@@ -11,6 +11,7 @@ import { useState } from "react";
 import useValidateEmail from "./useValidateEmail";
 import useAuth from "./useAuth";
 import Paragraph from "../../ui/Paragraph";
+import ButtonText from "../../ui/ButtonText";
 
 type OnSubmitTypes = {
   rePassword: string;
@@ -139,13 +140,9 @@ function SignUp() {
 
         <Paragraph page="Login" className="self-start py-10 sm:hidden">
           Already have an account?
-          <a
-            href="#"
-            onClick={signIn}
-            className="ml-5 font-semibold text-blue-600"
-          >
+          <ButtonText type="fakeLink" onClick={signIn}>
             Sign In
-          </a>
+          </ButtonText>
         </Paragraph>
       </Form>
     </motion.div>

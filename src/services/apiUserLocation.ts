@@ -18,14 +18,12 @@ export async function findUserLocationApi() {
       `http://api.ipapi.com/api/check?access_key=${API_KEY}`,
     );
 
-    console.log("reeeeeeeeeeeeeeeee");
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
-    console.log("Location data:", data);
+    // console.log("Location data:", data);
     return data;
   } catch (err) {
     const error = err as Error;

@@ -7,7 +7,8 @@ function useSignInWithGithub() {
     mutationKey: ["signInWithGithub"],
     mutationFn: signInWithGithubApi,
     onError: (err) => {
-      toast.error(`Error: ${err.message}`);
+      toast.error(`Error: ${err}`);
+      console.error(`Error: ${err}`);
     },
   });
 

@@ -23,7 +23,8 @@ function useAuth(
       setEmail("");
     },
     onError: (err) => {
-      toast.error(err?.message);
+      toast.error(`Error: ${err}`);
+      console.error(`Error: ${err}`);
     },
   });
 

@@ -1,10 +1,10 @@
-import Aside from "../features/sidebar/Aside";
 import Map from "../features/map/Map";
+import SideBar from "../features/sidebar/SideBar";
 
 function MainPage() {
   return (
     <div className={` grid h-screen  grid-cols-[auto_1fr] overflow-hidden`}>
-      <Aside />
+      <SideBar />
 
       <Map />
     </div>

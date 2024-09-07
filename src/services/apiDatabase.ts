@@ -1,7 +1,8 @@
+import toast from "react-hot-toast";
 import supabase from "./supabase";
 
-const MAINURL = "https://waybackk.netlify.app";
-// const MAINURL = "http://localhost:5173";
+// const MAINURL = "https://waybackk.netlify.app";
+const MAINURL = "http://localhost:5173";
 
 type LogInTypes = {
   email: string;
@@ -25,25 +26,32 @@ export async function logInApi({ email, password }: LogInTypes) {
     password,
   });
 
-  if (error) throw new Error(`Error: ${error.message}`);
+  if (error) throw new Error(error.message);
 
   return data;
 }
 
 export async function logoutApi() {
   const { error } = await supabase.auth.signOut();
-  if (error) throw new Error(`Error: ${error.message}`);
+  if (error) throw new Error(error.message);
 }
 
 export async function getCurrentUserApi() {
-  const { data: session } = await supabase.auth.getSession();
-  if (!session.session) return null;
+  try {
+    const { data: session } = await supabase.auth.getSession();
+    if (!session.session) return null;
 
-  const { data, error } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
 
-  if (error) throw new Error(`Error: ${error.message}`);
+    if (error) throw new Error(error.message);
 
-  return data?.user;
+    return data?.user;
+  } catch (err) {
+    const error = err as Error;
+    toast.error(`Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
+    return null
+  }
 }
 
 export async function resetPasswordApi({
@@ -54,7 +62,6 @@ export async function resetPasswordApi({
     email: retrievedEmail,
     password: password,
   });
-  console.log(data);
 
   if (error) throw new Error(error.message);
 
@@ -84,17 +91,6 @@ export async function createAccountApi({
   email,
   password,
 }: CreateAccountTypes): Promise<{ user: { id: string } }> {
-  // const allAccounts = await readAccounts();
-  // const emailAlreadyUsed = allAccounts.some(
-  //   (account) => account.email === accountData.email,
-  // );
-  // if (emailAlreadyUsed)
-  //   throw new Error("Error: Email has been used on website");
-  // const { data, error } = await supabase
-  //   .from("authentication")
-  //   .insert({ ...accountData })
-  //   .select();
-
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -107,7 +103,7 @@ export async function createAccountApi({
     },
   });
 
-  if (error) throw new Error(`Error: ${error.message}`);
+  if (error) throw new Error(error.message);
 
   if (!data.user || !data.user.id) {
     throw new Error("Error: No user ID returned");
@@ -127,7 +123,7 @@ export async function signInWithGithubApi() {
     },
   });
 
-  if (error) throw new Error(`Error: ${error.message}`);
+  if (error) throw new Error(error.message);
 }
 
 export async function updateUserApi() {

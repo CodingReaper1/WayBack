@@ -19,9 +19,16 @@ type MenusContextTypes = {
 };
 
 type ButtonTypes = {
-  children?: React.ReactNode;
-  icon?: React.ReactNode;
-  onClick?: () => void;
+  children: React.ReactNode;
+  icon: React.ReactNode;
+  onClick: () => void;
+};
+
+type ToggleTypes = {
+  id: string;
+  children: React.ReactNode;
+  rectX: number;
+  rectY: number;
 };
 
 const MenusContext = createContext<MenusContextTypes | null>(null);
@@ -57,7 +64,7 @@ function Menu({ children }: { children: React.ReactNode }) {
   return <div>{children}</div>;
 }
 
-function Toggle({ id, children }: { id: string; children: React.ReactNode }) {
+function Toggle({ id, children, rectX, rectY }: ToggleTypes) {
   const { open, openId, close, setPosition } = useMenusContext();
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -68,8 +75,8 @@ function Toggle({ id, children }: { id: string; children: React.ReactNode }) {
     if (!rect) return;
 
     setPosition({
-      x: rect.x - 25,
-      y: rect.y + rect.height + 8,
+      x: rect.x + rectX,
+      y: rect.y + rect.height + rectY,
     });
 
     if (openId === "" || openId !== id) {
@@ -99,7 +106,7 @@ function List({ id, children }: { id: string; children: React.ReactNode }) {
   return createPortal(
     <ul
       ref={ref}
-      className={`absolute flex  flex-col gap-1 rounded-md bg-slate-600  text-2xl text-white shadow-md shadow-slate-600`}
+      className={`absolute flex  flex-col gap-1 rounded-md bg-slate-600  text-2xl text-white shadow-sm shadow-slate-600`}
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
     >
       {children}

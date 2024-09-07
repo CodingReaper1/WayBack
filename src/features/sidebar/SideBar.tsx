@@ -16,6 +16,9 @@ import useLogout from "../auth/useLogout";
 import Menus from "../../ui/Menus.js";
 import { useState } from "react";
 import useEditSelectedPlace from "../selectedPlaces/useEditSelectedPlace.js";
+import { HiArrowLeftOnRectangle, HiCog8Tooth } from "react-icons/hi2";
+import ButtonText from "../../ui/ButtonText";
+import FlexBox from "../../ui/FlexBox";
 
 export type PlaceTypes = {
   id: number;
@@ -25,7 +28,7 @@ export type PlaceTypes = {
   coords: string;
 };
 
-function Aside() {
+function SideBar() {
   const {
     register,
     handleSubmit,
@@ -40,7 +43,7 @@ function Aside() {
   const lat: string | null = searchParams?.get("lat");
   const lng: string | null = searchParams?.get("lng");
 
-  const { sideBarFormOpen, sideBarOpened, closeSideBar, closeSideBarForm } =
+  const { sideBarOpened, closeSideBar, closeSideBarForm } =
     useMainPageContext();
   const { logout } = useLogout();
 
@@ -79,61 +82,69 @@ function Aside() {
       }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex justify-between">
-        <Button type="mainpage/link" onClick={logout}>
-          Log out
-        </Button>
-        <Button
-          type="mainpage/find"
-          className="sm:hidden"
-          onClick={() => closeSideBar()}
-        >
-          Close sidebar
-        </Button>
-      </div>
+      <Menus>
+        <FlexBox className="justify-between">
+          <Menus.Menu>
+            <Menus.Toggle id="settings" rectX={-10} rectY={8}>
+              <HiCog8Tooth className="size-10" />
+            </Menus.Toggle>
+            <Menus.List id="settings">
+              <Menus.Button
+                icon={
+                  <HiArrowLeftOnRectangle className="size-8 text-slate-400" />
+                }
+                onClick={logout}
+              >
+                Log out
+              </Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
 
-      <div className=" flex h-screen  flex-col gap-6 overflow-auto p-2">
-        <Form
-          onSubmit={handleSubmit(onSubmit)}
-          className={`${
-            sideBarFormOpen
-              ? `flex max-h-[50rem] flex-col gap-6 opacity-100`
-              : `pointer-events-none max-h-0 opacity-0`
-          }`}
-          page="Mainpage"
-        >
-          <NewFormRow
-            label="Destination name"
-            error={errors?.destination?.message}
+          <ButtonText
+            type="normal"
+            className="sm:hidden"
+            onClick={() => closeSideBar()}
           >
-            <NewInput
-              type="text"
-              id="destination"
-              required={true}
-              register={register}
-              validate={(value: string) =>
-                value.length < 15 ||
-                "Destination name has to be less than 15 characters"
-              }
-            />
-          </NewFormRow>
+            Close sidebar
+          </ButtonText>
+        </FlexBox>
 
-          <NewFormRow label="Description" error={errors?.description?.message}>
-            <NewInput type="text" id="description" register={register} />
-          </NewFormRow>
-
-          <div className="flex gap-2 text-lg xxs:text-2xl xs:gap-5 xs:text-3xl">
-            <Button type="mainpage">Save place</Button>
-            <Button
-              type="mainpage/cancelbtn"
-              onClick={() => closeSideBarForm()}
+        <FlexBox className="h-screen  flex-col gap-6 overflow-auto p-2">
+          <Form onSubmit={handleSubmit(onSubmit)} page="Mainpage">
+            <NewFormRow
+              label="Destination name"
+              error={errors?.destination?.message}
             >
-              Cancel
-            </Button>
-          </div>
-        </Form>
+              <NewInput
+                type="text"
+                id="destination"
+                required={true}
+                register={register}
+                validate={(value: string) =>
+                  value.length < 15 ||
+                  "Destination name has to be less than 15 characters"
+                }
+              />
+            </NewFormRow>
 
-        <Menus>
+            <NewFormRow
+              label="Description"
+              error={errors?.description?.message}
+            >
+              <NewInput type="text" id="description" register={register} />
+            </NewFormRow>
+
+            <FlexBox className="gap-2 text-lg xxs:text-2xl xs:gap-5 xs:text-3xl">
+              <Button type="mainpage">Save place</Button>
+              <Button
+                type="mainpage/cancelbtn"
+                onClick={() => closeSideBarForm()}
+              >
+                Cancel
+              </Button>
+            </FlexBox>
+          </Form>
+
           {loadingPlaces ? (
             <Spinner type="big" center={true} />
           ) : !(selectedPlaces.length === 0) ? (
@@ -152,10 +163,10 @@ function Aside() {
           ) : (
             <StartSelecting />
           )}
-        </Menus>
-      </div>
+        </FlexBox>
+      </Menus>
     </motion.aside>
   );
 }
 
-export default Aside;
+export default SideBar;

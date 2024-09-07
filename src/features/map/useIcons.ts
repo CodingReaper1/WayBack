@@ -8,18 +8,19 @@ function useIcons(myPosition: [number, number]) {
   useGeoloacationData(heading, setHeading);
 
   // Had to do something like this becouse i couldnt use jsx
-  // const mapPinIcon = L.divIcon({
-  //   className: "",
-  //   html: `
-  //   <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
-  //   `,
-  // });
+  
   const mapPinIcon = L.divIcon({
     className: "",
     html: `
-       <h1 class=" text-5xl">${heading}</h1>
+    <img src="/mapPin.png" class="w-14 h-14 transform -translate-y-11 -translate-x-4 "  />
     `,
   });
+  // const mapPinIcon = L.divIcon({
+  //   className: "",
+  //   html: `
+  //      <h1 class=" text-5xl">${heading}</h1>
+  //   `,
+  // });
 
   const myPositionIcon = L.divIcon({
     className: "",

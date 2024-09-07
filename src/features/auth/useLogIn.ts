@@ -20,7 +20,7 @@ function useLogIn() {
       enableButton();
     },
     onError: (err) => {
-      console.log(err);
+      console.error(`Error: ${err}`);
       toast.error("Provided email or password is incorrect");
       enableButton();
     },

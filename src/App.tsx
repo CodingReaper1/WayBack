@@ -6,10 +6,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import HomePage from "./pages/HomePage";
 import PageNotFound from "./pages/PageNotFound";
 import MainPage from "./pages/MainPage";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
 import NewLogin from "./pages/NewLogin";
 import DarkModeToggle from "./ui/DarkModeToggle";
-import Confirm from "./pages/Confirm";
+import Confirm from "./features/auth/Confirm";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import ResetPassword from "./pages/ResetPassword";
 

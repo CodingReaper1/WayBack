@@ -1,7 +1,8 @@
 import { useMapEvents } from "react-leaflet";
-import { useNavigate, useParams } from "react-router-dom";
-import useMainPageContext from "../../context/useMainPageContext";
 import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+
+import useMainPageContext from "../../context/useMainPageContext";
 
 function MapEvents() {
   const { routeLocked, openSideBar, openSideBarForm, isMapEnabled } =
@@ -21,7 +22,7 @@ function MapEvents() {
     },
     drag(e) {
       if (!isMapEnabled) {
-        e.target.dragging.disable(); // Disable dragging if the map is not enabled
+        e.target.dragging.disable(); 
       }
     },
   });

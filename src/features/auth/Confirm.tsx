@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import useLoginContext from "../context/useLoginContext";
-import { useUser } from "../features/auth/useUser";
+import useLoginContext from "../../context/useLoginContext";
+import { useUser } from "./useUser";
 import { useEffect } from "react";
+import Spinner from "../../ui/Spinner";
 
 function Confirm() {
   const { signIn } = useLoginContext();
@@ -17,7 +18,7 @@ function Confirm() {
     }
   }, [isAuthenticated, user, navigate, signIn, refetch]);
 
-  return <div>Loading... i guess</div>;
+  return <Spinner type="big" center={true} />;
 }
 
 export default Confirm;

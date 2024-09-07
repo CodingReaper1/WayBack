@@ -4,7 +4,7 @@ function Fakecoords() {
   const { myPosition, changeMyPosition } = useMyPositionContext();
 
   return (
-    <div className="absolute right-0 z-[9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999] h-96 w-96 text-3xl">
+    <div className="absolute right-0 z-[999999] h-96 w-96 text-3xl">
       <div>
         <label>lat</label>
         <input

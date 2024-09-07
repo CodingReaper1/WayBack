@@ -1,15 +1,16 @@
 import { useForm } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 import Form from "../ui/Form";
 import LoginFormRow from "../features/auth/LoginFormRow";
 import LoginInput from "../features/auth/LoginInput";
 import HOne from "../ui/HOne";
 import LoginButton from "../features/auth/LoginButton";
 import useLoginContext from "../context/useLoginContext";
-import AppNav from "../features/HomePage/AppNav";
+import AppNav from "../ui/AppNav";
 import useResetPassword from "../features/auth/useResetPassword";
 import { useEffect } from "react";
 import Paragraph from "../ui/Paragraph";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 type OnSubmitTypes = {
   password: string;
@@ -27,7 +28,6 @@ function PasswordRecovery() {
   const navigate = useNavigate();
 
   const { isButtonReady, disableButton } = useLoginContext();
-  // const [email, setEmail] = useState("");
   const { resetPassword } = useResetPassword();
   const [searchParams] = useSearchParams();
   const retrievedEmail: string | null = searchParams.get("email");

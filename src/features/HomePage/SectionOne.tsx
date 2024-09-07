@@ -2,7 +2,7 @@ import Button from "../../ui/Button";
 import HOne from "../../ui/HOne";
 import MotionStaggarChildrenDiv from "../../ui/MotionStaggarChildrenDiv";
 import Paragraph from "../../ui/Paragraph";
-import AppNav from "./AppNav";
+import AppNav from "../../ui/AppNav";
 import Background from "./Background";
 
 function SectionOne() {

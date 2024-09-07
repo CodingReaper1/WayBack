@@ -4,11 +4,7 @@ type UpdateRouteTypes = {
   lng: string | null;
 };
 
-async function updateRouteApi({
-  myPosition,
-  lat,
-  lng,
-}: UpdateRouteTypes): Promise<
+async function getRouteApi({ myPosition, lat, lng }: UpdateRouteTypes): Promise<
   | {
       paths: { points: string }[];
       message?: string;
@@ -38,20 +34,12 @@ async function updateRouteApi({
     }),
   });
 
-  // console.log(resp);
-  // if (!resp.ok) throw new Error("Problem with fetching route");
-
   const data = await resp.json();
-  // console.log(data);
-
-  // if (data?.message) throw new Error(`Error: ${data?.message}`);
-
-  //(!data.paths && data.paths.length > 0 && data.paths[0].points)
 
   return data;
 }
 
-export default updateRouteApi;
+export default getRouteApi;
 
 // const updateRoute = useCallback(() => {
 //   if (map.routeControl) {

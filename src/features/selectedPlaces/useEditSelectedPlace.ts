@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editSelectedPlaceApi } from "../../services/apiSelectedPlaces";
 import toast from "react-hot-toast";
-import useMainPageContext from "../../context/useMainPageContext";
 import { UseFormReset } from "react-hook-form";
-import { PlaceTypes } from "../sidebar/Aside";
+
+import { editSelectedPlaceApi } from "../../services/apiSelectedPlaces";
+import useMainPageContext from "../../context/useMainPageContext";
+import { PlaceTypes } from "../sidebar/SideBar";
 
 function useEditSelectedPlace(reset: UseFormReset<PlaceTypes>) {
   const queryClient = useQueryClient();
@@ -22,6 +23,7 @@ function useEditSelectedPlace(reset: UseFormReset<PlaceTypes>) {
     },
     onError: (err) => {
       toast.error(`Error: ${err}`);
+      console.error(`Error: ${err}`);
     },
   });
 

@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
+
 import Form from "../ui/Form";
 import LoginFormRow from "../features/auth/LoginFormRow";
 import LoginInput from "../features/auth/LoginInput";
 import HOne from "../ui/HOne";
 import LoginButton from "../features/auth/LoginButton";
 import useLoginContext from "../context/useLoginContext";
-import AppNav from "../features/HomePage/AppNav";
+import AppNav from "../ui/AppNav";
 import useSendResetPasswordEmail from "../features/auth/useSendResetPasswordEmail";
 import { useState } from "react";
 import Paragraph from "../ui/Paragraph";
+import { Link } from "react-router-dom";
 
 type OnSubmitTypes = {
   recoveryEmail: string;
@@ -54,9 +56,9 @@ function PasswordRecovery() {
         <LoginButton disabled={isButtonReady}>Send reset email</LoginButton>
         <Paragraph page="PasswordRecovery">
           Dont have an account?
-          <a href="/login" className="ml-5 font-semibold text-blue-600">
+          <Link to="/login" className="ml-5 font-semibold text-blue-600">
             Sign Up
-          </a>
+          </Link>
         </Paragraph>
       </Form>
     </div>

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
-import { useUser } from "../features/auth/useUser";
+import { useUser } from "./useUser";
+import Spinner from "../../ui/Spinner";
 
 type ProtectedRouteTypes = {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ function ProtectedRoute({ children }: ProtectedRouteTypes) {
     [isLoading, isAuthenticated, navigate],
   );
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Spinner type="big" center={true} />;
 
   if (isAuthenticated) return children;
 }

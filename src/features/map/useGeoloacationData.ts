@@ -28,7 +28,7 @@ function useGeoloacationData(
           setHeading(position.coords.heading);
       },
       (error) => {
-        console.error("Error getting current position:", error);
+        console.error(`Error getting current position: ${error}`);
         toast.error(`Location Error: ${error.message}`);
         if (error.message === "User denied Geolocation") disableMap();
       },

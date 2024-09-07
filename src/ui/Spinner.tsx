@@ -21,7 +21,7 @@ function Spinner({ type, center }: SpinnerTypes) {
     >
       {/* Inner Circle 1 */}
       <motion.div
-        className="absolute inset-0 box-border rounded-full border-4 border-white"
+        className="absolute inset-0 box-border rounded-full border-4 border-blue-700"
         animate={{
           clipPath: [
             "polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)",
@@ -33,7 +33,7 @@ function Spinner({ type, center }: SpinnerTypes) {
       />
       {/* Inner Circle 2 */}
       <motion.div
-        className="absolute inset-0 box-border rounded-full border-4 border-black"
+        className="absolute inset-0 box-border rounded-full border-4 border-blue-700"
         style={{ transform: "rotate3d(90, 90, 0, 180deg)" }}
         animate={{
           clipPath: [
