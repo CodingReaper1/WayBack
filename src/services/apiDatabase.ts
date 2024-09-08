@@ -91,6 +91,14 @@ export async function createAccountApi({
   email,
   password,
 }: CreateAccountTypes): Promise<{ user: { id: string } }> {
+  const { data: userData, error: userError } =
+    await supabase.auth.admin.listUsers();
+
+  if (userError) throw new Error(userError.message);
+
+  if (userData.users.some((user) => user.email === email))
+    throw new Error(`Email is already used on website`);
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,

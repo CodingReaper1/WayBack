@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import useLoginContext from "../../context/useLoginContext";
 import { useUser } from "./useUser";
 import { useEffect } from "react";
-import Spinner from "../../ui/Spinner";
+import Fallback from "../../ui/Fallback";
 
 function Confirm() {
   const { signIn } = useLoginContext();
@@ -18,7 +18,7 @@ function Confirm() {
     }
   }, [isAuthenticated, user, navigate, signIn, refetch]);
 
-  return <Spinner type="big" center={true} />;
+  return <Fallback />;
 }
 
 export default Confirm;

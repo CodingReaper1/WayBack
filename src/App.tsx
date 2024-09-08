@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import Confirm from "./features/auth/Confirm";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
-import SuspenseFallback from "./ui/SuspenseFallback";
+import Fallback from "./ui/Fallback";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewLogin = lazy(() => import("./pages/NewLogin"));
@@ -30,7 +30,7 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
 
       <BrowserRouter>
-        <Suspense fallback={<SuspenseFallback />}>
+        <Suspense fallback={<Fallback />}>
           <Routes>
             <Route index element={<Navigate replace to="homepage" />} />
             <Route path="homepage" element={<HomePage />} />
