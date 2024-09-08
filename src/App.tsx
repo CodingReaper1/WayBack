@@ -1,16 +1,19 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import HomePage from "./pages/HomePage";
-import PageNotFound from "./pages/PageNotFound";
-import MainPage from "./pages/MainPage";
-import ProtectedRoute from "./features/auth/ProtectedRoute";
-import NewLogin from "./pages/NewLogin";
 import Confirm from "./features/auth/Confirm";
-import PasswordRecovery from "./pages/PasswordRecovery";
-import ResetPassword from "./pages/ResetPassword";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
+import SuspenseFallback from "./ui/SuspenseFallback";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const NewLogin = lazy(() => import("./pages/NewLogin"));
+const MainPage = lazy(() => import("./pages/MainPage"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const PasswordRecovery = lazy(() => import("./pages/PasswordRecovery"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,25 +30,27 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
 
       <BrowserRouter>
-        <Routes>
-          <Route index element={<Navigate replace to="homepage" />} />
-          <Route path="homepage" element={<HomePage />} />
-          <Route path="login" element={<NewLogin />} />
-          <Route path="*" element={<PageNotFound />} />
+        <Suspense fallback={<SuspenseFallback />}>
+          <Routes>
+            <Route index element={<Navigate replace to="homepage" />} />
+            <Route path="homepage" element={<HomePage />} />
+            <Route path="login" element={<NewLogin />} />
+            <Route path="*" element={<PageNotFound />} />
 
-          <Route path="confirm" element={<Confirm />} />
-          <Route path="password-recovery" element={<PasswordRecovery />} />
-          <Route path="reset-password" element={<ResetPassword />} />
+            <Route path="confirm" element={<Confirm />} />
+            <Route path="password-recovery" element={<PasswordRecovery />} />
+            <Route path="reset-password" element={<ResetPassword />} />
 
-          <Route
-            path="map/:id"
-            element={
-              <ProtectedRoute>
-                <MainPage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+            <Route
+              path="map/:id"
+              element={
+                <ProtectedRoute>
+                  <MainPage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
 
       <Toaster
