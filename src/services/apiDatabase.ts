@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import supabase from "./supabase";
 
-const MAINURL = "https://waybackk.netlify.app";
+// const MAINURL = "https://waybackk.netlify.app";
+const MAINURL = "way-back.vercel.app";
 // const MAINURL = "http://localhost:5173";
 
 type LogInTypes = {
