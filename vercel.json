@@ -1,10 +1,4 @@
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "redirects": [
-    {
-      "source": "/login",
-      "destination": "/confirm",
-      "permanent": true
-    }
-  ]
+  "redirects": []
 }
