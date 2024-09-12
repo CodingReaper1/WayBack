@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" },
-    { "source": "/confirm", "destination": "/index.html" },
-    { "source": "/map", "destination": "/index.html" }
-  ],
-
-  "redirects": []
-}

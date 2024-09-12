@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import Fallback from "../../ui/Fallback";
 
 function Confirm() {
-  console.log("xuioznaet");
+
   const { signIn } = useLoginContext();
   const { isAuthenticated, user, refetch } = useUser();
   const navigate = useNavigate();
-  console.log(isAuthenticated);
+
   useEffect(() => {
     if (user) {
       navigate(`/map/${user.id}`);

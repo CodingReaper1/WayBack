@@ -7,7 +7,6 @@ import Fallback from "../../ui/Fallback";
 type ProtectedRouteTypes = {
   children: React.ReactNode;
 };
-console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
 function ProtectedRoute({ children }: ProtectedRouteTypes) {
   const navigate = useNavigate();
